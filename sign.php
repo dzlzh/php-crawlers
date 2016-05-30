@@ -13,6 +13,9 @@
  *  +--------------------------------------------------------------
  */
 
+//设置时区
+date_default_timezone_set('Asia/Shanghai');
+define('DATE', date('Y-m-d H:i:s'));
 
 //引入配置文件
 require_once 'config.php';
@@ -24,7 +27,10 @@ if ($isMatched) {
     $sign = curlHtml($signURL, null, $COOKIE['v2ex'], $userAgent);
     if (strstr($sign, '302') !== false) {
         $signHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
-        echo $signHtml;
+        $isMatched = preg_match('/\x{6bcf}\x{65e5}\x{767b}\x{5f55}\x{5956}\x{52b1}\x{5df2}\x{9886}\x{53d6}/u', $signHtml, $matches);
+        if ($isMatched) {
+            echo DATE, $matches[0];
+        }
     }
 }
 
