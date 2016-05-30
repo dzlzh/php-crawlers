@@ -17,6 +17,17 @@
 //引入配置文件
 require_once 'config.php';
 
+$signHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
+$isMatched = preg_match('/\/mission\/daily\/(redeem\?once=\w*)/', $signHtml, $matches);
+if ($isMatched) {
+    $signURL = $URL['v2ex'] . $matches[1];
+    $sign = curlHtml($signURL, null, $COOKIE['v2ex'], $userAgent);
+    if (strstr($sign, '302') !== false) {
+        $signHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
+        echo $signHtml;
+    }
+}
+
 function curlHtml($url, $param = null, $cookie = null, $userAgent = null)
 {
     for ($i = 0; $i < 3; $i++) {
@@ -48,11 +59,3 @@ function curlHtml($url, $param = null, $cookie = null, $userAgent = null)
     }
     return $error;
 }
-
-$sign = curlHtml($URL['v2ex'], null, $COOKIE['v2ex']);
-$isMatched = preg_match('/\/mission\/daily\/(redeem\?once=\w*)/', $sign, $matches);
-if ($isMatched) {
-    $signURL = $URL['v2ex'] . $matches[1];
-    $sign = curlHtml($signURL, null, $COOKIE['v2ex']);
-}
-
