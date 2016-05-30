@@ -19,15 +19,31 @@ define('DATE', date('Y-m-d H:i:s'));
 
 //引入配置文件
 require_once 'config.php';
+//v2dn sign
+$v2dnSignURL = $URL['v2dn'] . 'checkIn.php';
+$v2dnSign = curlHtml($v2dnSignURL, null, $COOKIE['v2dn'], $userAgent);
+if (strstr($v2dnSign, '302') !== false) {
+    $v2dnURL = $URL['v2dn'] . 'mypoints.php';
+    $v2dnHtml = curlHtml($v2dnURL, null, $COOKIE['v2dn'], $userAgent);
+    echo $v2dnHtml;
+    $isMatched = preg_match('/((((1[6-9]|[2-9]\d)\d{2})-(1[02]|0?[13578])-([12]\d|3[01]|0?[1-9]))|(((1[6-9]|[2-9]\d)\d{2})-(1[012]|0?[13456789])-([12]\d|30|0?[1-9]))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(1\d|2[0-8]|0?[1-9]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29-))/', $v2dnHtml, $matches);
+    var_dump($isMatched, $matches);
+    // $isMatched = preg_match('', $v2dnHtml, $matches);
+    // if ($isMatched) {
+        // echo DATE, $matches[0];
+    // }
+}
+die;
 
-$signHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
-$isMatched = preg_match('/\/mission\/daily\/(redeem\?once=\w*)/', $signHtml, $matches);
+//v2ex sign
+$v2exHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
+$isMatched = preg_match('/\/mission\/daily\/(redeem\?once=\w*)/', $v2exHtml, $matches);
 if ($isMatched) {
-    $signURL = $URL['v2ex'] . $matches[1];
-    $sign = curlHtml($signURL, null, $COOKIE['v2ex'], $userAgent);
-    if (strstr($sign, '302') !== false) {
-        $signHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
-        $isMatched = preg_match('/\x{6bcf}\x{65e5}\x{767b}\x{5f55}\x{5956}\x{52b1}\x{5df2}\x{9886}\x{53d6}/u', $signHtml, $matches);
+    $v2exSignURL = $URL['v2ex'] . $matches[1];
+    $v2exSign = curlHtml($v2exSignURL, null, $COOKIE['v2ex'], $userAgent);
+    if (strstr($v2exSign, '302') !== false) {
+        $v2exHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
+        $isMatched = preg_match('/\x{6bcf}\x{65e5}\x{767b}\x{5f55}\x{5956}\x{52b1}\x{5df2}\x{9886}\x{53d6}/u', $v2exHtml, $matches);
         if ($isMatched) {
             echo DATE, $matches[0];
         }
