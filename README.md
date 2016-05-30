@@ -1,5 +1,5 @@
 # Automatic Sign
 
-v2ex
+v2ex complete
 
-v2dn
+v2dn complete
