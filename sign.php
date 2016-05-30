@@ -33,7 +33,6 @@ if (strstr($v2dnSign, '302') !== false) {
         echo DATE, "\tv2dn签到失败\n";
     }
 }
-die;
 
 //v2ex sign
 $v2exHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
