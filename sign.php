@@ -51,6 +51,15 @@ if (!empty($URL['v2ex'])) {
             } else {
                 echo DATE, "\tv2ex签到失败\n";
             }
+        } else {
+            echo DATE . "\t" . $v2exSign . "\n";
+        }
+    } else {
+        $isMatched = preg_match('/\x{6bcf}\x{65e5}\x{767b}\x{5f55}\x{5956}\x{52b1}\x{5df2}\x{9886}\x{53d6}/u', $v2exHtml);
+        if ($isMatched) {
+            echo DATE, "\tv2ex签到成功\n";
+        } else {
+            echo DATE, "\tv2ex签到失败\n";
         }
     }
 }
