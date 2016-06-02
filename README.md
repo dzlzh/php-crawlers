@@ -1,27 +1,55 @@
 # lagou crawler
 
+[json](http://www.lagou.com/jobs/positionAjax.json?px=default&city=%E5%8C%97%E4%BA%AC&first=true&pn=204&kd=PHP`)
+
 `uuid`
 
-`position`          职位
+`positionId`            职位ID
 
-`place`             地点
+`positionName`          职位名称
 
-`canton`            行政区
+`positionType`          职位类型
 
-`address`           具体地址
+`positionAdvantage`     职位诱惑
 
-`company`           公司
+------
 
-`money`             薪水
+`companyName`           公司名称
 
-`experience`        经验
+`companyShortName`      公司简称
 
-`industry`          行业
+`companySize`           公司规模
 
-`url`
+`companyHome`           公司主页
 
-`url_md5`
+`industryField`         行业领域
 
-`release_time`      发布时间
+`financeStage`          融资阶段
 
-`collection_time`   采集时间
+------
+
+`city`                  城市
+
+`district`              区域
+
+`businessZone`          商业区
+
+`address`               具体地址
+
+------
+
+`salary`                薪水
+
+`workYear`              工作经验
+
+`education`             学历要求
+
+`jobNature`             工作性质
+
+`jobDescription`        职位描述
+
+------
+
+`createTime`            创建时间
+
+`collectionTime`        采集时间
