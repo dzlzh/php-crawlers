@@ -85,7 +85,20 @@ class PDOMysql
      */
     public function insert($table, $param, $insertID = true)
     {
-        $fields = array_keys($param);
+        $keys = array_keys($param);
+        var_dump($keys);
+        $fields = $keys;
+        array_walk($fields, array('PDOMysql', 'addSpecialChar'));
+        $fields = implode(',', $fields);
+        $parameters = $keys;
+        foreach ($parameters as $key => $value) {
+            $parameters[$key] = ':' . $value;
+        }
+        $parameters = implode(',', $parameters);
+        $sql = 'INSERT INTO `' . $table . '` (' . $fields . ') VALUE (' . $parameters . ')';
+        echo $sql;
+        var_dump($fields);
+        var_dump($parameters);
     }
     
     /**
@@ -110,4 +123,18 @@ class PDOMysql
 require_once 'config.php';
 $pdo = new PDOMysql();
 $pdo->connect($dbconfig);
-var_dump($pdo->findOne('select UUID();'));
+$param = array(
+    // '.' => '',
+    // '*' => '',
+    // '``' => '',
+    'type'      => 'mysql',
+    'host'      => '',
+    'port'      => '3306',
+    'dbname'    => '',
+    'dbuser'    => '',
+    'dbpwd'     => '',
+    'dbcharset' => 'utf8',
+    'dbdebug'   => true,
+);   
+// var_dump($pdo->findOne('select UUID();'));
+$pdo->insert('1',$param);
