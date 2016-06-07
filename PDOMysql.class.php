@@ -126,6 +126,22 @@ class PDOMysql
         return self::errorMsg($stmt);
         
     }
+
+    /**
+     * del
+     *
+     * @return void
+     */
+    public function del($table, $where = null)
+    {
+        $sql = 'DELETE FROM `' . $table . '`';
+        if (!empty($where)) {
+            $sql .= ' WHERE ' . $where;
+        }
+        $stmt = $this->query($sql, null);
+        return self::errorMsg($stmt);
+    }
+    
     
     /**
      * addSpecialChar
@@ -169,28 +185,29 @@ date_default_timezone_set('Asia/Shanghai');
 $pdo = new PDOMysql();
 $pdo->connect($dbconfig);
 $param = array(
-    // 'uuid'              => 'UUID',
-    'positionId'        => '111',
-    'positionName'      => '1职位名称',
-    'positionType'      => '1职位类型',
-    'positionAdvantage' => '1职位诱惑',
-    'companyName'       => '1公司名称',
-    'companyShortName'  => '1公司简称',
-    'companySize'       => '1公司规模',
-    'companyHome'       => '1公司主页',
-    'industryField'     => '1行业领域',
-    'financeStage'      => '1融资阶段',
-    'city'              => '1城市',
-    'district'          => '1区域',
-    'businessZone'      => '1商业区',
-    'address'           => '1具体地址',
-    'salary'            => '1薪水',
-    'workYear'          => '1工作经验',
-    'education'         => '1学历要求',
-    'jobNature'         => '1工作性质',
-    'jobDescription'    => '1职位描述',
+    'uuid'              => 'UUID',
+    'positionId'        => '1',
+    'positionName'      => '职位名称',
+    'positionType'      => '职位类型',
+    'positionAdvantage' => '职位诱惑',
+    'companyName'       => '公司名称',
+    'companyShortName'  => '公司简称',
+    'companySize'       => '公司规模',
+    'companyHome'       => '公司主页',
+    'industryField'     => '行业领域',
+    'financeStage'      => '融资阶段',
+    'city'              => '城市',
+    'district'          => '区域',
+    'businessZone'      => '商业区',
+    'address'           => '具体地址',
+    'salary'            => '薪水',
+    'workYear'          => '工作经验',
+    'education'         => '学历要求',
+    'jobNature'         => '工作性质',
+    'jobDescription'    => '职位描述',
     'createTime'        => date("Y-m-d H:i:s"),
     'collectionTime'    => date("Y-m-d H:i:s"),
 );   
 // var_dump($pdo->findOne('select UUID();'));
-var_dump($pdo->update('lagou',$param, 'uuid="UUID"'));
+// var_dump($pdo->insert('lagou',$param));
+// var_dump($pdo->del('lagou'));
