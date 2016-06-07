@@ -7,7 +7,7 @@
  *  +--------------------------------------------------------------
  *  | Filename: PDOMysql.class.php
  *  +--------------------------------------------------------------
- *  | Last modified: 2016-06-03 17:00
+ *  | Last modified: 2016-06-07 16:40
  *  +--------------------------------------------------------------
  *  | Description: 
  *  +--------------------------------------------------------------
@@ -172,42 +172,14 @@ class PDOMysql
             return $stmt->rowCount();
         }
     }
-    
-    
-    
-    
+
+   /**
+    * qstr
+    *
+    * @return string
+    */
+   private function qstr($string)
+   {
+       return $this->con->query($string);
+   }
 }
-
-
-
-require_once 'config.php';
-date_default_timezone_set('Asia/Shanghai');
-$pdo = new PDOMysql();
-$pdo->connect($dbconfig);
-$param = array(
-    'uuid'              => 'UUID',
-    'positionId'        => '1',
-    'positionName'      => '职位名称',
-    'positionType'      => '职位类型',
-    'positionAdvantage' => '职位诱惑',
-    'companyName'       => '公司名称',
-    'companyShortName'  => '公司简称',
-    'companySize'       => '公司规模',
-    'companyHome'       => '公司主页',
-    'industryField'     => '行业领域',
-    'financeStage'      => '融资阶段',
-    'city'              => '城市',
-    'district'          => '区域',
-    'businessZone'      => '商业区',
-    'address'           => '具体地址',
-    'salary'            => '薪水',
-    'workYear'          => '工作经验',
-    'education'         => '学历要求',
-    'jobNature'         => '工作性质',
-    'jobDescription'    => '职位描述',
-    'createTime'        => date("Y-m-d H:i:s"),
-    'collectionTime'    => date("Y-m-d H:i:s"),
-);   
-// var_dump($pdo->findOne('select UUID();'));
-// var_dump($pdo->insert('lagou',$param));
-// var_dump($pdo->del('lagou'));
