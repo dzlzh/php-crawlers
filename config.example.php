@@ -25,3 +25,31 @@ $dbconfig = array(
     'dbdebug'   => true,
 );
 
+$parameters = array(
+    'first' => 'true',
+    'needAddtionalResult' => 'false',
+    //页码
+    'pn' => '1',
+    //搜索的职位
+    'kd' => 'php',
+    //排序方式
+    'px' => 'new',
+    //工作地点
+    'city' => '北京',
+    //行政区
+    'district' => '朝阳区',
+    //商区
+    'bizArea' => '望京',
+    //工作经验
+    'gj' => '3年及以下',
+    //学历要求
+    'xl' => '大专',
+    //融资阶段
+    'jd' => '未融资',
+    //行业领域
+    'hy' => '移动互联网',
+    //月薪
+    'yx' => '10k-15k',
+    //工作性质
+    'gx' => '全职',
+);
