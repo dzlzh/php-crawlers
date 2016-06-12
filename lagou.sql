@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50545
 File Encoding         : 65001
 
-Date: 2016-06-02 16:56:20
+Date: 2016-06-12 13:57:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,12 +28,13 @@ CREATE TABLE `lagou` (
   `companyName` varchar(255) DEFAULT NULL,
   `companyShortName` varchar(255) DEFAULT NULL,
   `companySize` varchar(255) DEFAULT NULL,
+  `companyLabelList` varchar(255) DEFAULT NULL,
   `companyHome` varchar(255) DEFAULT NULL,
   `industryField` varchar(255) DEFAULT NULL,
   `financeStage` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `district` varchar(255) DEFAULT NULL,
-  `businessZone` varchar(255) DEFAULT NULL,
+  `businessZones` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `salary` varchar(255) DEFAULT NULL,
   `workYear` varchar(255) DEFAULT NULL,

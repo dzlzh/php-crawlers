@@ -6,6 +6,7 @@
 
 [json](http://www.lagou.com/jobs/positionAjax.json?px=default&first=true&city=%E5%8C%97%E4%BA%AC&pn=1&kd=PHP)
 
+[job](http://www.lagou.com/jobs/1866587.html)
 
 ------
 
@@ -29,6 +30,8 @@
 
 `companySize`           公司规模
 
+`companyLabelList`      公司标签列表
+
 `companyHome`           公司主页
 
 `industryField`         行业领域
@@ -41,7 +44,7 @@
 
 `district`              区域
 
-`businessZone`          商业区
+`businessZones`         商业区
 
 `address`               具体地址
 
@@ -61,8 +64,9 @@
 
 `createTime`            创建时间
 
-`collectionTime`        采集时间
+`jobUrl`                招聘URL
 
+`collectionTime`        采集时间
 
 ------
 
@@ -73,14 +77,11 @@ first:true
 
 needAddtionalResult:false
 
-//页码
-pn:1
+//排序方式
+px:new
 
 //搜索的职位
 kd:php
-
-//排序方式
-px:new
 
 //工作地点
 city:北京
@@ -108,4 +109,7 @@ yx:10k-15k
 
 //工作性质
 gx:全职
+
+//页码
+pn:1
 ```
