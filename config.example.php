@@ -29,6 +29,9 @@ $dbconfig = array(
     'dbdebug'   => true,
 );
 
+$jobsUrl = 'http://www.lagou.com/jobs/positionAjax.json?';
+$jobUrl  = 'http://www.lagou.com/jobs/';
+
 $parameters = array(
     'first'                 => 'true',
     'needAddtionalResult'   => 'false',
