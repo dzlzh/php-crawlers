@@ -28,12 +28,10 @@ $dbconfig = array(
 $parameters = array(
     'first'                 => 'true',
     'needAddtionalResult'   => 'false',
-    //页码
-    'pn'                    => '1',
-    //搜索的职位
-    'kd'                    => 'php',
     //排序方式
     'px'                    => 'new',
+    //搜索的职位
+    'kd'                    => 'php',
     //工作地点
     'city'                  => '北京',
     //行政区
@@ -52,4 +50,8 @@ $parameters = array(
     'yx'                    => '',
     //工作性质
     'gx'                    => '',
+    //页码
+    'pn'                    => '1',
 );
+
+$url = 'http://www.lagou.com/jobs/positionAjax.json?';
