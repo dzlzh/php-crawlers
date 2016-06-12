@@ -27,15 +27,15 @@ foreach ($parameters as $key => $value) {
 
 for ($i = 1; $i < 200; $i++) {
     $jobsUrl .= 'pn=' . $i;
-    echo $jobsUrl;
     $jsonData = json_decode(curlHtml($jobsUrl), true);
     $jobs = $jsonData['content']['positionResult']['result'];
     foreach ($jobs as $job) {
         $jobUrl .= $job['positionId'] . '.html';
         $jobData = curlHtml($jobUrl);
-        echo $jobUrl;
-        var_dump($jobData);
-        die;
+        $isMatched = preg_match('/var\spositionAddress\s=\s\'([^\']+)\'/', $jobData, $matches);
+        $address = $isMatched ? $matches[1] : null;
+        $isMatched = preg_match('/<dd\sclass="job_bt">\s*<h3[^>]*>.*<\/h3>((?:.|\n)*?)<\/dd>/', $jobData, $matches);
+        $jobDescription = $isMatched ? trim(strip_tags($matches[1]), " \t\n\r\0\x0B") : null;
         $param = array(
             'uuid'              => getUUID(),
             'positionId'        => $job['positionId'],
@@ -45,23 +45,24 @@ for ($i = 1; $i < 200; $i++) {
             'companyName'       => $job['companyName'],
             'companyShortName'  => $job['companyShortName'],
             'companySize'       => $job['companySize'],
-            'companyLabelList'  => implode(',', $job['companyLabelList']),
+            'companyLabelList'  => empty($job['companyLabelList']) ? null : implode(',', $job['companyLabelList']),
             'industryField'     => $job['industryField'],
             'financeStage'      => $job['financeStage'],
             'city'              => $job['city'],
             'district'          => $job['district'],
-            'businessZones'     => implode(',', $job['businessZones']),
-            'address'           => '具体地址',
+            'businessZones'     => empty($job['businessZones']) ? null : implode(',', $job['businessZones']),
+            'address'           => $address,
             'salary'            => $job['salary'],
             'workYear'          => $job['workYear'],
             'education'         => $job['education'],
             'jobNature'         => $job['jobNature'],
-            'jobDescription'    => '职位描述',
+            'jobDescription'    => $jobDescription,
             'createTime'        => $job['createTime'],
             'jobUrl'            => $jobUrl,
             'collectionTime'    => date("Y-m-d H:i:s"),
         );   
         print_r($param);
+        var_dump($pdo->insert('lagou',$param));
         die;
     }
     print_r($jobs);
