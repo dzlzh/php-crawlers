@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50545
 File Encoding         : 65001
 
-Date: 2016-06-12 13:57:58
+Date: 2016-06-12 14:37:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,6 @@ CREATE TABLE `lagou` (
   `companyShortName` varchar(255) DEFAULT NULL,
   `companySize` varchar(255) DEFAULT NULL,
   `companyLabelList` varchar(255) DEFAULT NULL,
-  `companyHome` varchar(255) DEFAULT NULL,
   `industryField` varchar(255) DEFAULT NULL,
   `financeStage` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
@@ -42,6 +41,7 @@ CREATE TABLE `lagou` (
   `jobNature` varchar(255) DEFAULT NULL,
   `jobDescription` varchar(255) DEFAULT NULL,
   `createTime` datetime DEFAULT NULL,
+  `jobUrl` varchar(255) DEFAULT NULL,
   `collectionTime` datetime DEFAULT NULL,
   PRIMARY KEY (`uuid`),
   UNIQUE KEY `positionId` (`positionId`) USING BTREE

@@ -32,8 +32,6 @@
 
 `companyLabelList`      公司标签列表
 
-`companyHome`           公司主页
-
 `industryField`         行业领域
 
 `financeStage`          融资阶段

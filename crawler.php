@@ -46,7 +46,6 @@ for ($i = 1; $i < 200; $i++) {
             'companyShortName'  => $job['companyShortName'],
             'companySize'       => $job['companySize'],
             'companyLabelList'  => implode(',', $job['companyLabelList']),
-            'companyHome'       => '公司主页',
             'industryField'     => $job['industryField'],
             'financeStage'      => $job['financeStage'],
             'city'              => $job['city'],
