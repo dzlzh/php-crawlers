@@ -7,12 +7,16 @@
  *  +--------------------------------------------------------------
  *  | Filename: config.example.php
  *  +--------------------------------------------------------------
- *  | Last modified: 2016-06-03 16:54
+ *  | Last modified: 2016-06-12 11:35
  *  +--------------------------------------------------------------
  *  | Description: 
  *  +--------------------------------------------------------------
  */
 
+date_default_timezone_set('Asia/Shanghai');
+
+require_once 'PDOMysql.class.php';
+require_once 'function.php';
 
 $dbconfig = array(
     'type'      => 'mysql',
@@ -51,7 +55,7 @@ $parameters = array(
     //工作性质
     'gx'                    => '',
     //页码
-    'pn'                    => '1',
+    // 'pn'                    => '1',
 );
 
 $url = 'http://www.lagou.com/jobs/positionAjax.json?';
