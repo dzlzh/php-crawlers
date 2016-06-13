@@ -7,7 +7,7 @@
  *  +--------------------------------------------------------------
  *  | Filename: crawler.php
  *  +--------------------------------------------------------------
- *  | Last modified: 2016-06-08 11:00
+ *  | Last modified: 2016-06-13 11:02
  *  +--------------------------------------------------------------
  *  | Description: 
  *  +--------------------------------------------------------------
@@ -30,17 +30,23 @@ foreach ($positionIds as $key => $value) {
     $positionIds[$key] = $value['positionId'];
 }
 
-for ($i = 1; $i <= 2; $i++) {
+for ($i = 1; $i <= 200; $i++) {
+    $i = 199;
+    echo "==============================\n";
+    echo "pn:" . $i . "\n";
+    echo "------------------------------\n";
     $jobsUrl = $jobsBaseUrl . 'pn=' . $i;
-    echo $jobsUrl . "\n";
     $jsonData = json_decode(curlHtml($jobsUrl), true);
+    if ($jsonData['content']['positionResult']['pageSize'] <= 0) {
+        break;
+    }
     $jobs = $jsonData['content']['positionResult']['result'];
     foreach ($jobs as $job) {
         if (in_array($job['positionId'], $positionIds)) {
+            echo $job['positionId'] . "\t\t--\texist\n";
             continue;
         } else {
             $jobUrl = $jobBaseUrl . $job['positionId'] . '.html';
-            echo $jobUrl . "\n";
             $jobData = curlHtml($jobUrl);
             $isMatched = preg_match('/var\spositionAddress\s=\s\'([^\']+)\'/', $jobData, $matches);
             $address = $isMatched ? $matches[1] : null;
@@ -71,12 +77,13 @@ for ($i = 1; $i <= 2; $i++) {
                 'jobUrl'            => $jobUrl,
                 'collectionTime'    => date("Y-m-d H:i:s"),
             );
-            var_dump($pdo->insert('lagou',$param));
+            $result = $pdo->insert('lagou',$param);
+            if (strpos($result, 'ERROR') === false) {
+                $positionIds[] = $job['positionId'];
+                echo $jobUrl . "\t\t--\tsucceed\n";
+            } else {
+                echo $result . "\n";
+            }
         }
     }
-        echo "----------------------------\n";
 }
-
-// var_dump($pdo->findOne('select UUID();'));
-// var_dump($pdo->insert('lagou',$param));
-// var_dump($pdo->del('lagou'));
