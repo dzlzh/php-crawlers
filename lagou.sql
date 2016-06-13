@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50545
 File Encoding         : 65001
 
-Date: 2016-06-12 14:37:22
+Date: 2016-06-13 09:14:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ CREATE TABLE `lagou` (
   `workYear` varchar(255) DEFAULT NULL,
   `education` varchar(255) DEFAULT NULL,
   `jobNature` varchar(255) DEFAULT NULL,
-  `jobDescription` varchar(255) DEFAULT NULL,
+  `jobDescription` text,
   `createTime` datetime DEFAULT NULL,
   `jobUrl` varchar(255) DEFAULT NULL,
   `collectionTime` datetime DEFAULT NULL,

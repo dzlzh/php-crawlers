@@ -21,21 +21,21 @@ $pdo->connect($dbconfig);
 
 foreach ($parameters as $key => $value) {
     if (!empty($value)) {
-        $jobsUrl .= $key . '=' . $value . '&';
+        $jobsBaseUrl .= $key . '=' . $value . '&';
     }
 }
 
-for ($i = 1; $i < 200; $i++) {
-    $jobsUrl .= 'pn=' . $i;
+for ($i = 1; $i < 10; $i++) {
+    $jobsUrl = $jobsBaseUrl . 'pn=' . $i;
     $jsonData = json_decode(curlHtml($jobsUrl), true);
     $jobs = $jsonData['content']['positionResult']['result'];
     foreach ($jobs as $job) {
-        $jobUrl .= $job['positionId'] . '.html';
+        $jobUrl = $jobBaseUrl . $job['positionId'] . '.html';
         $jobData = curlHtml($jobUrl);
         $isMatched = preg_match('/var\spositionAddress\s=\s\'([^\']+)\'/', $jobData, $matches);
         $address = $isMatched ? $matches[1] : null;
         $isMatched = preg_match('/<dd\sclass="job_bt">\s*<h3[^>]*>.*<\/h3>((?:.|\n)*?)<\/dd>/', $jobData, $matches);
-        $jobDescription = $isMatched ? trim(strip_tags($matches[1]), " \t\n\r\0\x0B") : null;
+        $jobDescription = $isMatched ? preg_replace("/(\s|\&nbsp\;|　|\xc2\xa0)/", "", strip_tags($matches[1])) : null;
         $param = array(
             'uuid'              => getUUID(),
             'positionId'        => $job['positionId'],
@@ -61,12 +61,9 @@ for ($i = 1; $i < 200; $i++) {
             'jobUrl'            => $jobUrl,
             'collectionTime'    => date("Y-m-d H:i:s"),
         );   
-        print_r($param);
         var_dump($pdo->insert('lagou',$param));
-        die;
     }
-    print_r($jobs);
-die;
+        die;
 }
 
 // var_dump($pdo->findOne('select UUID();'));
