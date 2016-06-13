@@ -16,7 +16,7 @@
 
 require_once 'config.php';
 
-echo "=-=-=-=-=-\t" . DATE . "\t-=-=-=-=-=\n";
+echo "\n\n=-=-=-=-=-\t" . DATE . "\t-=-=-=-=-=\n\n";
 
 $pdo = new PDOMysql();
 $pdo->connect($dbconfig);
