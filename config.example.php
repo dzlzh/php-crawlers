@@ -16,6 +16,8 @@
 ini_set('memory_limit','-1');
 date_default_timezone_set('Asia/Shanghai');
 
+define('DATE', date('Y-m-d H:i:s'));
+
 require_once 'PDOMysql.class.php';
 require_once 'function.php';
 
