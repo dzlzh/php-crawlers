@@ -16,6 +16,8 @@
 
 require_once 'config.php';
 
+echo "=-=-=-=-=-\t" . DATE . "\t-=-=-=-=-=\n";
+
 $pdo = new PDOMysql();
 $pdo->connect($dbconfig);
 
@@ -30,7 +32,7 @@ foreach ($positionIds as $key => $value) {
     $positionIds[$key] = $value['positionId'];
 }
 
-for ($i = 1; $i <= 200; $i++) {
+for ($i = 1; $i <= 5; $i++) {
     echo "==============================\n";
     echo "pn:" . $i . "\n";
     echo "------------------------------\n";
