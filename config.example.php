@@ -63,5 +63,3 @@ $parameters = array(
     //页码
     // 'pn'                    => '1',
 );
-
-$url = 'http://www.lagou.com/jobs/positionAjax.json?';
