@@ -66,7 +66,7 @@ for ($i = 1; $i <= 5; $i++) {
                 'industryField'     => $job['industryField'],
                 'financeStage'      => $job['financeStage'],
                 'city'              => $job['city'],
-                'district'          => $job['district'],
+                'district'          => empty($job['district']) ? 'unknown' : $job['district'],
                 'businessZones'     => empty($job['businessZones']) ? 'unknown' : implode(',', $job['businessZones']),
                 'address'           => $address,
                 'salary'            => $job['salary'],
