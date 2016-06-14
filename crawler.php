@@ -7,7 +7,7 @@
  *  +--------------------------------------------------------------
  *  | Filename: crawler.php
  *  +--------------------------------------------------------------
- *  | Last modified: 2016-06-13 11:02
+ *  | Last modified: 2016-06-14 09:13
  *  +--------------------------------------------------------------
  *  | Description: 
  *  +--------------------------------------------------------------
@@ -50,9 +50,9 @@ for ($i = 1; $i <= 5; $i++) {
             $jobUrl = $jobBaseUrl . $job['positionId'] . '.html';
             $jobData = curlHtml($jobUrl);
             $isMatched = preg_match('/var\spositionAddress\s=\s\'([^\']+)\'/', $jobData, $matches);
-            $address = $isMatched ? $matches[1] : null;
+            $address = $isMatched ? $matches[1] : 'unknown';
             $isMatched = preg_match('/<dd\sclass="job_bt">\s*<h3[^>]*>.*<\/h3>((?:.|\n)*?)<\/dd>/', $jobData, $matches);
-            $jobDescription = $isMatched ? preg_replace("/(\s|\&nbsp\;|　|\xc2\xa0)/", "", strip_tags($matches[1])) : null;
+            $jobDescription = $isMatched ? preg_replace("/(\s|\&nbsp\;|　|\xc2\xa0)/", "", strip_tags($matches[1])) : 'unknown';
             $param = array(
                 'uuid'              => getUUID(),
                 'positionId'        => $job['positionId'],
@@ -62,12 +62,12 @@ for ($i = 1; $i <= 5; $i++) {
                 'companyName'       => $job['companyName'],
                 'companyShortName'  => $job['companyShortName'],
                 'companySize'       => $job['companySize'],
-                'companyLabelList'  => empty($job['companyLabelList']) ? null : implode(',', $job['companyLabelList']),
+                'companyLabelList'  => empty($job['companyLabelList']) ? 'unknown' : implode(',', $job['companyLabelList']),
                 'industryField'     => $job['industryField'],
                 'financeStage'      => $job['financeStage'],
                 'city'              => $job['city'],
                 'district'          => $job['district'],
-                'businessZones'     => empty($job['businessZones']) ? null : implode(',', $job['businessZones']),
+                'businessZones'     => empty($job['businessZones']) ? 'unknown' : implode(',', $job['businessZones']),
                 'address'           => $address,
                 'salary'            => $job['salary'],
                 'workYear'          => $job['workYear'],
