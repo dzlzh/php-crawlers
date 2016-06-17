@@ -16,7 +16,7 @@
 //设置时区
 date_default_timezone_set('Asia/Shanghai');
 define('DATE', date('Y-m-d H:i:s'));
-
+echo "---", DATE, "---\n";
 //引入配置文件
 require_once 'config.php';
 
@@ -29,9 +29,9 @@ if (!empty($URL['v2dn'])) {
         $v2dnHtml = curlHtml($v2dnURL, null, $COOKIE['v2dn'], $userAgent);
         $isMatched = preg_match('/((((1[6-9]|[2-9]\d)\d{2})-(1[02]|0?[13578])-([12]\d|3[01]|0?[1-9]))|(((1[6-9]|[2-9]\d)\d{2})-(1[012]|0?[13456789])-([12]\d|30|0?[1-9]))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(1\d|2[0-8]|0?[1-9]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29-))/', $v2dnHtml, $matches);
         if ($isMatched && $matches[0] == substr(DATE, 0, 10)) {
-            echo DATE, "\tv2dn签到成功\n";
+            echo "v2dn签到成功\n";
         } else {
-            echo DATE, "\tv2dn签到失败\n";
+            echo "v2dn签到失败\n";
         }
     }
 }
@@ -47,19 +47,19 @@ if (!empty($URL['v2ex'])) {
             $v2exHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
             $isMatched = preg_match('/\x{6bcf}\x{65e5}\x{767b}\x{5f55}\x{5956}\x{52b1}\x{5df2}\x{9886}\x{53d6}/u', $v2exHtml);
             if ($isMatched) {
-                echo DATE, "\tv2ex签到成功\n";
+                echo "v2ex签到成功\n";
             } else {
-                echo DATE, "\tv2ex签到失败\n";
+                echo "v2ex签到失败\n";
             }
         } else {
-            echo DATE . "\t" . $v2exSign . "\n";
+            echo $v2exSign, "\n";
         }
     } else {
         $isMatched = preg_match('/\x{6bcf}\x{65e5}\x{767b}\x{5f55}\x{5956}\x{52b1}\x{5df2}\x{9886}\x{53d6}/u', $v2exHtml);
         if ($isMatched) {
-            echo DATE, "\tv2ex签到成功\n";
+            echo "v2ex签到成功\n";
         } else {
-            echo DATE, "\tv2ex签到失败\n";
+            echo "v2ex签到失败\n";
         }
     }
 }
