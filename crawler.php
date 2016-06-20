@@ -47,10 +47,18 @@ for ($i = 1; $i <= 5; $i++) {
             if ($job['createTime'] == $idTime[$job['positionId']]) {
                 echo $job['positionId'], "——", $job['createTime'], "\t-----\texist\n";
             } else {
-
+                $where = "positionId = '" . $job['positionId'] . "'";
+                $param = array(
+                    'createTime'        => $job['createTime'],
+                    'collectionTime'    => date("Y-m-d H:i:s"),
+                );
+                $result = $pdo->update('lagou', $param, $where);
+                if (strpos($result, 'ERROR') === false) {
+                    echo $job['positionId'], "——", $job['createTime'], "\t-----\ttiem update\n";
+                } else {
+                    echo $result, "\n";
+                }
             }
-            // echo $job['createTime'],$idTime[$job['positionId']];
-            die;
             continue;
         } else {
             $jobUrl = $jobBaseUrl . $job['positionId'] . '.html';
