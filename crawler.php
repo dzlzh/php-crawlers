@@ -16,7 +16,7 @@
 
 require_once 'config.php';
 
-echo "\n\n=-=-=-=-=-\t" . DATE . "\t-=-=-=-=-=\n\n";
+echo "\n\n=-=-=-=-=-\t", DATE, "\t-=-=-=-=-=\n\n";
 
 $pdo = new PDOMysql();
 $pdo->connect($dbconfig);
@@ -27,17 +27,15 @@ foreach ($parameters as $key => $value) {
     }
 }
 
-$dataArr = $pdo->findAll('SELECT `positionId`, `createTime` FROM lagou limit 5;');
+$dataArr = $pdo->findAll('SELECT `positionId`, `createTime` FROM lagou;');
 foreach ($dataArr as $key => $value) {
     $idTime[$value['positionId']] = $value['createTime'];
 }
-print_r($idTime);
-die;
 
 for ($i = 1; $i <= 5; $i++) {
-    echo "==============================\n";
-    echo "pn:" . $i . "\n";
-    echo "------------------------------\n";
+    echo "====================================\n";
+    echo "pn:", $i, "\n";
+    echo "------------------------------------\n";
     $jobsUrl = $jobsBaseUrl . 'pn=' . $i;
     $jsonData = json_decode(curlHtml($jobsUrl), true);
     if ($jsonData['content']['positionResult']['pageSize'] <= 0) {
@@ -45,8 +43,14 @@ for ($i = 1; $i <= 5; $i++) {
     }
     $jobs = $jsonData['content']['positionResult']['result'];
     foreach ($jobs as $job) {
-        if (in_array($job['positionId'], $positionIds)) {
-            echo $job['positionId'] . "\t\t--\texist\n";
+        if (array_key_exists($job['positionId'], $idTime)) {
+            if ($job['createTime'] == $idTime[$job['positionId']]) {
+                echo $job['positionId'], "——", $job['createTime'], "\t-----\texist\n";
+            } else {
+
+            }
+            // echo $job['createTime'],$idTime[$job['positionId']];
+            die;
             continue;
         } else {
             $jobUrl = $jobBaseUrl . $job['positionId'] . '.html';
@@ -83,9 +87,9 @@ for ($i = 1; $i <= 5; $i++) {
             $result = $pdo->insert('lagou',$param);
             if (strpos($result, 'ERROR') === false) {
                 $positionIds[] = $job['positionId'];
-                echo $jobUrl . "\t\t--\tsucceed\n";
+                echo $jobUrl, "\t\t--\tsucceed\n";
             } else {
-                echo $result . "\n";
+                echo $result, "\n";
             }
         }
     }
