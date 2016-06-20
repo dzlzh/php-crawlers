@@ -48,3 +48,10 @@ foreach ($workYears as $value) {
 }
 echo "-------------------------\n";
 
+$educationSql = 'SELECT education, COUNT(education) AS number FROM lagou GROUP BY education ORDER BY number DESC';
+$educations = $pdo->findAll($educationSql);
+foreach ($educations as $value) {
+    $proportion = round(($value['number']/$total)*100, 2) . '%';
+    echo $value['education'], ':', $value['number'], " —— ", $proportion, "\n";
+}
+echo "-------------------------\n";
