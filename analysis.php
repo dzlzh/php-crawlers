@@ -39,3 +39,12 @@ foreach ($financeStages as $value) {
     echo $value['financeStage'], ':', $value['number'], " —— ", $proportion, "\n";
 }
 echo "-------------------------\n";
+
+$workYearSql = 'SELECT workYear, COUNT(workYear) AS number FROM lagou GROUP BY workYear ORDER BY number DESC';
+$workYears = $pdo->findAll($workYearSql);
+foreach ($workYears as $value) {
+    $proportion = round(($value['number']/$total)*100, 2) . '%';
+    echo $value['workYear'], ':', $value['number'], " —— ", $proportion, "\n";
+}
+echo "-------------------------\n";
+
