@@ -2,6 +2,78 @@
 
 -----
 
+### Analysis
+
+*Time : 2016-06-20 15:30:00*
+
+`SELECT count(uuid) AS number FROM  lagou;`
+
+*Data Number : 3267*
+
+#### District
+
+`SELECT district, COUNT(district) AS number FROM lagou GROUP BY district ORDER BY number DESC;`
+
+| District | Number | Proportion |
+| :------: | :----: | :--------: |
+|   朝阳区    |  1363  |   41.72%   |
+|   海淀区    |  1088  |   33.3%    |
+| unknown  |  301   |   9.21%    |
+|   东城区    |  160   |    4.9%    |
+|   丰台区    |  117   |   3.58%    |
+|   西城区    |   92   |   2.82%    |
+|   昌平区    |   66   |   2.02%    |
+|   大兴区    |   30   |   0.92%    |
+|   通州区    |   23   |    0.7%    |
+|   石景山区   |   22   |   0.67%    |
+|   顺义区    |   3    |   0.09%    |
+|   房山区    |   2    |   0.06%    |
+
+#### FinanceStage
+
+`SELECT financeStage, COUNT(financeStage) AS number FROM lagou GROUP BY financeStage ORDER BY number DESC;`
+
+| FinanceStage | Number | Proportion |
+| :----------: | :----: | :--------: |
+|   成长型(A轮)    |  600   |   18.37%   |
+|   初创型(未融资)   |  588   |    18%     |
+|     上市公司     |  479   |   14.66%   |
+|   初创型(天使轮)   |  432   |   13.22%   |
+|  成长型(不需要融资)  |  235   |   7.19%    |
+|   成长型(B轮)    |  233   |   7.13%    |
+|  成熟型(D轮及以上)  |  222   |    6.8%    |
+|  初创型(不需要融资)  |  175   |   5.36%    |
+|  成熟型(不需要融资)  |  166   |   5.08%    |
+|   成熟型(C轮)    |  137   |   4.19%    |
+
+#### Work Year
+
+`SELECT workYear, COUNT(workYear) AS number FROM lagou GROUP BY workYear ORDER BY number DESC;`
+
+| Work Year | Number | Proportion |
+| :-------: | :----: | :--------: |
+|   3-5年    |  1457  |   44.60%   |
+|   1-3年    |  1356  |   41.51%   |
+|    不限     |  234   |   07.16%   |
+|   5-10年   |  162   |   04.96%   |
+|   应届毕业生   |   30   |   0.92%    |
+|   1年以下    |   26   |    0.8%    |
+|   10年以上   |   2    |   0.06%    |
+
+
+#### Education
+
+`SELECT education, COUNT(education) AS number FROM lagou GROUP BY education ORDER BY number DESC;`
+
+| Education | Number | Proportion |
+| :-------: | :----: | :--------: |
+|    本科     |  1797  |    55%     |
+|    大专     |  1059  |   32.42%   |
+|   学历不限    |  410   |   12.55%   |
+|    硕士     |   1    |   0.03%    |
+
+-----
+
 ### URL
 
 [json](http://www.lagou.com/jobs/positionAjax.json?px=default&first=true&city=%E5%8C%97%E4%BA%AC&pn=1&kd=PHP)
