@@ -27,10 +27,12 @@ foreach ($parameters as $key => $value) {
     }
 }
 
-$positionIds = $pdo->findAll('SELECT `positionId` FROM lagou;');
-foreach ($positionIds as $key => $value) {
-    $positionIds[$key] = $value['positionId'];
+$dataArr = $pdo->findAll('SELECT `positionId`, `createTime` FROM lagou limit 5;');
+foreach ($dataArr as $key => $value) {
+    $idTime[$value['positionId']] = $value['createTime'];
 }
+print_r($idTime);
+die;
 
 for ($i = 1; $i <= 5; $i++) {
     echo "==============================\n";
