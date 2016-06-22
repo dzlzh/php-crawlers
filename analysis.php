@@ -42,6 +42,21 @@ foreach ($sql as $key => $value) {
     echo "-------------------------\n";
 }
 
+echo "\n\tindustryField\n\n";
+$industryFieldSql = 'SELECT industryField FROM lagou';
+$industryFieldData = $pdo->findAll($industryFieldSql);
+foreach ($industryFieldData as $key => $value) {
+    $industryField = explode(' · ',$value['industryField']);
+    $industryFieldData[$key] = trim($industryField[0]);
+    for ($i = 1; $i < count($industryField); $i++) {
+        $industryFieldData[] = trim($industryField[$i]);
+    }
+}
+$industryFieldData = array_count_values($industryFieldData);
+arsort($industryFieldData);
+output($industryFieldData);
+echo "-------------------------\n";
+
 function output($data)
 {
     global $total;
