@@ -33,16 +33,22 @@ $sql = array(
 
 foreach ($sql as $key => $value) {
     echo "\n\t", $key, "\n\n";
-    $data = $pdo->findAll($value);
-    foreach ($data as $v) {
-        $proportion = proportion($v['number'], $total);
-        echo $v[$key], ':', $v['number'], " —— ", $proportion, "\n";
+    $datas = $pdo->findAll($value);
+    $data = array();
+    foreach ($datas as $v) {
+        $data[$v[$key]] = $v['number'];
     }
+    output($data);
     echo "-------------------------\n";
 }
 
-function proportion($num, $total)
+function output($data)
 {
-    return round(($num/$total)*100, 2) . '%';
+    global $total;
+    foreach ($data as $key => $value) {
+        $proportion = round(($value/$total)*100, 2) . '%';
+        echo $key, ':', $value, " —— ", $proportion, "\n";
+    }
 }
+
 
