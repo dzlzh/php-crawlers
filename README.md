@@ -4,14 +4,14 @@
 
 * [Analysis](#analysis)
   * [Time](#time)
-  * [Data Number](#data number)
+  * [Data Number](#datanumber)
   * [District](#district)
-  * [Finance Stage](#finance stage)
-  * [Work Year](#work year)
+  * [Finance Stage](#financestage)
+  * [Work Year](#workyear)
   * [Education](#education)
-  * [Industry Field](#industry field)
+  * [IndustryField](#industryfield)
   * [Salary](#Salary)
-  * [Work Year —— Salary](#work year —— salary)
+  * [WorkYear——Salary](#workyea ——salary)
     * [不限](#不限)
     * [应届毕业生](#应届毕业生)
     * [1年以下](#1年以下)
@@ -21,7 +21,7 @@
     * [10年以上](#10年以上)
 * [URL](#url)
 * [Data](#data)
-* [Query String Parameters](#query string parameters)
+* [QueryStringParameters](#querystringparameters)
 
 
 -----
@@ -32,7 +32,7 @@
 
 *Time : 2016-06-23 17:00:00*
 
-### Data Number
+### DataNumber
 
 *Data Number : 3464*
 
@@ -53,7 +53,7 @@
 |   顺义区    |   4    |   0.12%    |
 |   房山区    |   3    |   0.09%    |
 
-### Finance Stage
+### FinanceStage
 
 | Finance Stage | Number | Proportion |
 | :-----------: | :----: | :--------: |
@@ -68,7 +68,7 @@
 |  成熟型(不需要融资)   |  178   |   5.14%    |
 |    成熟型(C轮)    |  141   |   4.07%    |
 
-### Work Year
+### WorkYear
 
 | Work Year | Number | Proportion |
 | :-------: | :----: | :--------: |
@@ -91,7 +91,7 @@
 |   学历不限    |  439   |   12.67%   |
 |    硕士     |   1    |   0.03%    |
 
-### Industry Field
+### IndustryField
 
 | Industry Field | Number | Proportion |
 | :------------: | :----: | :--------: |
@@ -126,7 +126,7 @@
 | 15k-25k |  1504  |   43.42%   |
 | 25k-50k |  110   |   3.18%    |
 
-### Work Year —— Salary
+### WorkYear——Salary
 
 #### 不限
 
@@ -263,7 +263,7 @@
 
 ------
 
-## Query String Parameters
+## QueryStringParameters
 
 ```
 first:true
