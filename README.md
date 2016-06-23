@@ -9,19 +9,19 @@
   * [Finance Stage](#financestage)
   * [Work Year](#workyear)
   * [Education](#education)
-  * [IndustryField](#industryfield)
-  * [Salary](#Salary)
-  * [WorkYear——Salary](#workyea ——salary)
+  * [Industry Field](#industryfield)
+  * [Salary](#salary)
+  * [Work Year-Salary](#workyear-salary)
     * [不限](#不限)
     * [应届毕业生](#应届毕业生)
     * [1年以下](#1年以下)
-    * [1-3年](#1*3年)
-    * [3-5年](#3*5年)
-    * [5-10年](#5*10年)
+    * [1-3年](#1-3年)
+    * [3-5年](#3-5年)
+    * [5-10年](#5-10年)
     * [10年以上](#10年以上)
 * [URL](#url)
 * [Data](#data)
-* [QueryStringParameters](#querystringparameters)
+* [Query String Parameters](#querystringparameters)
 
 
 -----
@@ -126,7 +126,7 @@
 | 15k-25k |  1504  |   43.42%   |
 | 25k-50k |  110   |   3.18%    |
 
-### WorkYear——Salary
+### WorkYear-Salary
 
 #### 不限
 
