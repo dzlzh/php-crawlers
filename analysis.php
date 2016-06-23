@@ -38,7 +38,7 @@ foreach ($sql as $key => $value) {
     foreach ($datas as $v) {
         $data[$v[$key]] = $v['number'];
     }
-    output($data);
+    output($data, $total);
     echo "-------------------------\n";
 }
 
@@ -54,13 +54,13 @@ foreach ($industryFieldData as $key => $value) {
 }
 $industryFieldData = array_count_values($industryFieldData);
 arsort($industryFieldData);
-output($industryFieldData);
+output($industryFieldData, $total);
 echo "-------------------------\n";
 
 echo "\n\tsalary\n\n";
 $salarySql = 'SELECT salary FROM lagou';
 $salaryData = $pdo->findAll($salarySql);
-output(salary($salaryData));
+output(salary($salaryData), $total);
 echo "-------------------------\n";
 
 echo "\n\twork year —— salary\n\n";
@@ -78,17 +78,18 @@ foreach ($workYear as $value) {
     echo "\n",$value,"\n";
     $workYearSalarySql = 'SELECT salary FROM lagou WHERE workYear="' . $value . '"';
     $workYearSalaryData = $pdo->findAll($workYearSalarySql);
-    output(salary($workYearSalaryData));
+    output(salary($workYearSalaryData), count($workYearSalaryData));
     echo "-------------\n";
 }
 
 
-function output($data)
+function output($data, $total)
 {
-    global $total;
     foreach ($data as $key => $value) {
-        $proportion = round(($value/$total)*100, 2) . '%';
-        echo $key, ':', $value, " —— ", $proportion, "\n";
+        if ($value > 0) {
+            $proportion = round(($value/$total)*100, 2) . '%';
+            echo $key, ':', $value, " —— ", $proportion, "\n";
+        }
     }
 }
 
