@@ -57,39 +57,30 @@ arsort($industryFieldData);
 output($industryFieldData);
 echo "-------------------------\n";
 
-echo "\nsalary\n\n";
-$salaryNum = array(
-    '2k以下'  => 0,
-    '2k-5k'    => 0,
-    '5k-10k'   => 0,
-    '10k-15k'  => 0,
-    '15k-25k'  => 0,
-    '25k-50k'  => 0,
-    '50k以上' => 0,
-);
+echo "\n\tsalary\n\n";
 $salarySql = 'SELECT salary FROM lagou';
 $salaryData = $pdo->findAll($salarySql);
-foreach ($salaryData as $value) {
-    $isMatched = preg_match('/^(\d+)k/', $value['salary'], $matches);
-    if ($isMatched) {
-        if ($matches[1] < 2) {
-            ++$salaryNum['2k以下'];
-        } elseif ($matches[1] < 5) {
-            ++$salaryNum['2k-5k'];
-        } elseif ($matches[1] < 10) {
-            ++$salaryNum['5k-10k'];
-        } elseif ($matches[1] < 15) {
-            ++$salaryNum['10k-15k'];
-        } elseif ($matches[1] < 25) {
-            ++$salaryNum['15k-25k'];
-        } elseif ($matches[1] < 50) {
-            ++$salaryNum['25k-50k'];
-        } else {
-            ++$salaryNum['50k以上'];
-        }
-    }
+output(salary($salaryData));
+echo "-------------------------\n";
+
+echo "\n\twork year —— salary\n\n";
+$workYear = array(
+    '不限',
+    '应届毕业生',
+    '1年以下',
+    '1-3年',
+    '3-5年',
+    '5-10年',
+    '10年以上',
+);
+
+foreach ($workYear as $value) {
+    echo "\n",$value,"\n";
+    $workYearSalarySql = 'SELECT salary FROM lagou WHERE workYear="' . $value . '"';
+    $workYearSalaryData = $pdo->findAll($workYearSalarySql);
+    output(salary($workYearSalaryData));
+    echo "-------------\n";
 }
-output($salaryNum);
 
 
 function output($data)
@@ -101,4 +92,37 @@ function output($data)
     }
 }
 
+function salary($data)
+{
+    $salaryNum = array(
+        '2k以下'  => 0,
+        '2k-5k'    => 0,
+        '5k-10k'   => 0,
+        '10k-15k'  => 0,
+        '15k-25k'  => 0,
+        '25k-50k'  => 0,
+        '50k以上' => 0,
+    );
+    foreach ($data as $value) {
+        $isMatched = preg_match('/^(\d+)k/', $value['salary'], $matches);
+        if ($isMatched) {
+            if ($matches[1] < 2) {
+                ++$salaryNum['2k以下'];
+            } elseif ($matches[1] < 5) {
+                ++$salaryNum['2k-5k'];
+            } elseif ($matches[1] < 10) {
+                ++$salaryNum['5k-10k'];
+            } elseif ($matches[1] < 15) {
+                ++$salaryNum['10k-15k'];
+            } elseif ($matches[1] < 25) {
+                ++$salaryNum['15k-25k'];
+            } elseif ($matches[1] < 50) {
+                ++$salaryNum['25k-50k'];
+            } else {
+                ++$salaryNum['50k以上'];
+            }
+        }
+    }
+    return $salaryNum;
+}
 
