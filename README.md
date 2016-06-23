@@ -1,18 +1,41 @@
 # lagou crawler
 
+## 目录
+
+- [Analysis](#Analysis)
+  - [Time](#Time)
+  - [Data Number](#Data Number)
+  - [District](#District)
+  - [Finance Stage](#Finance Stage)
+  - [Work Year](#Work Year)
+  - [Education](#Education)
+  - [Industry Field](#Industry Field)
+  - [Salary](#Salary)
+  - [Work Year —— Salary](#Work Year —— Salary)
+    - [不限](#不限)
+    - [应届毕业生](#应届毕业生)
+    - [1年以下](#1年以下)
+    - [1-3年](#1-3年)
+    - [3-5年](#3-5年)
+    - [5-10年](#5-10年)
+    - [10年以上](#10年以上)
+- [URL](#URL)
+- [Data](#Data)
+- [Query String Parameters](#Query String Parameters)
+
 -----
 
-### Analysis
+## Analysis
 
-#### Time
+### Time
 
 *Time : 2016-06-23 17:00:00*
 
-#### Data Number
+### Data Number
 
 *Data Number : 3464*
 
-#### District
+### District
 
 | District | Number | Proportion |
 | :------: | :----: | :--------: |
@@ -29,7 +52,7 @@
 |   顺义区    |   4    |   0.12%    |
 |   房山区    |   3    |   0.09%    |
 
-#### Finance Stage
+### Finance Stage
 
 | Finance Stage | Number | Proportion |
 | :-----------: | :----: | :--------: |
@@ -44,7 +67,7 @@
 |  成熟型(不需要融资)   |  178   |   5.14%    |
 |    成熟型(C轮)    |  141   |   4.07%    |
 
-#### Work Year
+### Work Year
 
 | Work Year | Number | Proportion |
 | :-------: | :----: | :--------: |
@@ -57,7 +80,7 @@
 |   10年以上   |   2    |   0.06%    |
 
 
-#### Education
+### Education
 
 
 | Education | Number | Proportion |
@@ -67,7 +90,7 @@
 |   学历不限    |  439   |   12.67%   |
 |    硕士     |   1    |   0.03%    |
 
-#### Industry Field
+### Industry Field
 
 | Industry Field | Number | Proportion |
 | :------------: | :----: | :--------: |
@@ -91,7 +114,7 @@
 |       招聘       |   17   |   0.49%    |
 |      分类信息      |   11   |   0.32%    |
 
-#### Salary
+### Salary
 
 | Salary  | Number | Proportion |
 | :-----: | :----: | :--------: |
@@ -102,9 +125,9 @@
 | 15k-25k |  1504  |   43.42%   |
 | 25k-50k |  110   |   3.18%    |
 
-#### Work Year —— Salary
+### Work Year —— Salary
 
-##### 不限
+#### 不限
 
 | Salary  | Number | Proportion |
 | :-----: | :----: | :--------: |
@@ -115,7 +138,7 @@
 | 15k-25k |   75   |   29.64%   |
 | 25k-50k |   8    |   3.16%    |
 
-##### 应届毕业生
+#### 应届毕业生
 
 | Salary  | Number | Proportion |
 | :-----: | :----: | :--------: |
@@ -124,7 +147,7 @@
 | 5k-10k  |   12   |   37.5%    |
 | 10k-15k |   3    |   9.38%    |
 
-##### 1年以下
+#### 1年以下
 
 | Salary  | Number | Proportion |
 | :-----: | :----: | :--------: |
@@ -134,7 +157,7 @@
 | 10k-15k |   9    |   33.33%   |
 | 15k-25k |   2    |   7.41%    |
 
-##### 1-3年
+#### 1-3年
 
 | Salary  | Number | Proportion |
 | :-----: | :----: | :--------: |
@@ -145,7 +168,7 @@
 | 15k-25k |  382   |   26.64%   |
 | 25k-50k |   4    |   0.28%    |
 
-##### 3-5年
+#### 3-5年
 
 | Salary  | Number | Proportion |
 | :-----: | :----: | :--------: |
@@ -155,7 +178,7 @@
 | 15k-25k |  928   |   60.14%   |
 | 25k-50k |   59   |   3.82%    |
 
-##### 5-10年
+#### 5-10年
 
 | Salary  | Number | Proportion |
 | :-----: | :----: | :--------: |
@@ -165,7 +188,7 @@
 | 15k-25k |  117   |   67.63%   |
 | 25k-50k |   37   |   21.39%   |
 
-##### 10年以上
+#### 10年以上
 
 | Salary  | Number | Proportion |
 | :-----: | :----: | :--------: |
@@ -173,7 +196,7 @@
 
 -----
 
-### URL
+## URL
 
 [json](http://www.lagou.com/jobs/positionAjax.json?px=default&first=true&city=%E5%8C%97%E4%BA%AC&pn=1&kd=PHP)
 
@@ -181,7 +204,7 @@
 
 ------
 
-### Data
+## Data
 
 `uuid`
 
@@ -239,7 +262,7 @@
 
 ------
 
-### Query String Parameters
+## Query String Parameters
 
 ```
 first:true
