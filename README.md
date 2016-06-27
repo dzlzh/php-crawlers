@@ -22,6 +22,7 @@
 * [URL](#url)
 * [Data](#data)
 * [Query String Parameters](#querystringparameters)
+* [Skill key][#skillkey]
 
 
 -----
@@ -306,3 +307,81 @@ gx:全职
 //页码
 pn:1
 ```
+
+## SkillKey
+
+- php
+- mysql
+- web
+- linux
+- css
+- javascript
+- html
+- ajax
+- jquery
+- sql
+- mvc
+- lamp
+- js
+- apache
+- xml
+- unix
+- div
+- nginx
+- yii
+- thinkphp
+- redis
+- xhtml
+- shell
+- oop
+- json
+- memcache
+- zend
+- java
+- api
+- ci
+- svn
+- python
+- codeigniter
+- html5
+- nosql
+- discuz
+- smarty
+- mongodb
+- cms
+- oracle
+- w3c
+- framework
+- lbs
+- git
+- memcached
+- tcp
+- lnmp
+- cakephp
+- rest
+- crm
+- android
+- uml
+- css3
+- webservice
+- php5
+- tp
+- dhtml
+- ecshop
+- symfony
+- erp
+- windows
+- sns
+- wordpress
+- seo
+- phpcms
+- bootstrap
+- drupal
+- cache
+- o2o
+- ui
+- postgresql
+- perl
+- github
+- oa
+- yaf
