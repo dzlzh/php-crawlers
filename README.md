@@ -3,33 +3,19 @@
 ## 目录
 
 * [Analysis](#analysis)
-
   * [Time](#time)
-
   * [Data Number](#datanumber)
-
   * [District](#district)
-
   * [Finance Stage](#financestage)
-
   * [Work Year](#workyear)
-
   * [Education](#education)
-
   * [Industry Field](#industryfield)
-
   * [Salary](#salary)
-
   * [Work Year-Salary](#workyear-salary)
-
   * [Skill Key](#skillkey)
-
 * [URL](#url)
-
 * [Data](#data)
-
 * [Query String Parameters](#querystringparameters)
-
 
 -----
 
