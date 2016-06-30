@@ -377,3 +377,5 @@ gx:全职
 //页码
 pn:1
 ```
+
+`0 0-11,20-23 * * * /usr/bin/php -f /root/lagou-crawler/crawler.php >> /root/lagou-crawler/crawler.log`
