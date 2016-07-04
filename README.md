@@ -85,3 +85,86 @@
 
 - [笔试面试](http://wiki.jikexueyuan.com/list/written-interview/)
 - [v6](http://wiki.jikexueyuan.com/list/v6/)
+
+## List URL
+
+[List](http://wiki.jikexueyuan.com/list/)
+
+```php
+$list = array(
+    //移动开发
+    'Android' => 'android',
+    'iOS' => 'ios',
+    'WindowsApp' => 'wa',
+    'Cocos' => 'cocos',
+    
+    //后端开发
+    'Java' => 'java',
+    'PHP' => 'php',
+    'Node.js' => 'nodejs',
+    'Python' => 'python',
+    'Go语言' => 'go',
+    'Ruby' => 'ruby',
+    'ASP.NET' => 'asp-net',
+    'C&C++' => 'c',
+    'Lua' => 'lua',
+    'Dart' => 'dart',
+    '网络' => 'net',
+    'API' => 'api',
+    'Scala' => 'scala',
+    'Rust' => 'rust',
+    'Julia' => 'julia',
+    'OpenGL' => 'opengl',
+    '算法' => 'sort',
+    
+    //前端开发
+    'JavaScript' => 'javascript',
+    'HTML&CSS' => 'html',
+    'AngularJS' => 'angularjs',
+    'Bootstrap' => 'bootstrap',
+    'React' => 'react',
+    'jQuery' => 'jquery',
+    'vaadin' => 'vaadin',
+    'xml' => 'xml',
+    
+    //数据库
+    'MySQL' => 'mysql',
+    'Oracle' => 'oracle',
+    'SQlite' => 'sqlite',
+    'Redis' => 'redis',
+    'MongoDB' => 'mongodb',
+    'SQLServer' => 'sql-server',
+    
+    //开发工具
+    '代码托管' => 'code',
+    'IDE' => 'ide',
+    '自动化' => 'automation',
+    '产品&设计' => 'product',
+    
+    //云计算&大数据
+    'Docker' => 'docker',
+    'Hadoop' => 'hadoop',
+    'NSQ' => 'nsq',
+    'openstack' => 'openstack',
+    'WindowsAzure' => 'windows-azure',
+    
+    //人工智能
+    '深度学习' => 'deep-learning',
+    
+    //智能硬件
+    '开源硬件' => 'open-hardware',
+    '新酷技术' => 'cool',
+    '单片机' => 'microcontrollers',
+    
+    //服务器
+    'Linux' => 'linux',
+    'Nginx' => 'nginx',
+    'Tomcat' => 'tomcat',
+    'Harp' => 'harp',
+    
+    //职业规划
+    '笔试面试' => 'written-interview',
+    'v6' => 'v6',
+);
+```
+
