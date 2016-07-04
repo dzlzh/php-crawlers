@@ -13,6 +13,7 @@
  *  +--------------------------------------------------------------
  */
 
+$jkxyWikiListUrl = 'http://wiki.jikexueyuan.com/list/';
 
 $jkxyWikiUrlList = array(
     '移动开发' => array(
