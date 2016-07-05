@@ -49,7 +49,7 @@ function curlHtml($url, $userAgent = null, $cookie = null, $param = null)
         if ($userAgent != null) {
             curl_setopt($curl, CURLOPT_USERAGENT, $userAgent);
         }
-        if ($path != null) {
+        if ($param != null) {
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $param);
         }
