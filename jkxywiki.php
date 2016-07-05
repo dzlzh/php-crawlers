@@ -40,5 +40,17 @@ foreach ($jkxyWikiUrlList as $key => $value) {
     foreach ($value as $k => $v) {
         $path = DIRECTORY_PATH . DIRECTORY_SEPARATOR . $key . DIRECTORY_SEPARATOR . $k . DIRECTORY_SEPARATOR;
         echo makeDirectory($path . 'PDF') && makeDirectory($path . 'ePub') ? $path . ' -- successful' . PHP_EOL : $path . ' -- failure' . PHP_EOL;
+        $projectListUrl = $jkxyWikiUrl . $v;
+        $projectListHtml = curlHtml($projectListUrl, $userAgent);
+        $projectListIsMatched = preg_match_all('/<a\sclass="cell\scf"\shref="([^"]+)"\starget="_blank">/', $projectListHtml, $projectList);
+        if ($projectListIsMatched) {
+            foreach ($projectList[1] as $key => $value) {
+                $projectHtml = curlHtml($value, $userAgent, $cookie);
+                $pdfIsMatched = preg_match('/<a\shref="([^"]+)"\starget="_blank"\sclass="download-pdf\sblue-btn">/', $projectHtml, $pdfDownloadUrl);
+                $pdfDownloadUrl = $jkxyWikiUrl . trim($pdfDownloadUrl[1]);
+                $pdf = curlHtml($pdfDownloadUrl, $userAgent, $cookie);
+            }
+        }
+        die;
     }
 }
