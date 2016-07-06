@@ -52,6 +52,10 @@ foreach ($jkxyWikiUrlList as $key => $value) {
                 if ($pdfIsMatched) {
                     $pdfDownloadUrl = $jkxyWikiUrl . trim($pdfDownloadUrl[1]);
                     $pdfDownloadHtml = curlHtml($pdfDownloadUrl, $userAgent, $cookie);
+                    if (strstr($pdfDownloadHtml, 'http_code:404')) {
+                        echo $pdfDownloadUrl, ' -- 404', PHP_EOL;
+                        continue;
+                    }
                     $pdfUrlIsMatched = preg_match('/<a[^>]+>([^<]+)<\/a>/', $pdfDownloadHtml, $pdfUrl);
                     if ($pdfUrlIsMatched) {
                         $pdfUrl = $pdfUrl[1];
@@ -63,7 +67,6 @@ foreach ($jkxyWikiUrlList as $key => $value) {
                             if (curlHtml($pdfUrl, $userAgent, $cookie, null, $pdfPath)) {
                                 echo '    |-- ', $pdfName, PHP_EOL;
                             }
-                            die;
                         }
                     }
                 }
