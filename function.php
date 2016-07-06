@@ -56,11 +56,11 @@ function curlHtml($url, $userAgent = null, $cookie = null, $param = null, $file 
         if ($cookie != null) {
             curl_setopt($curl, CURLOPT_COOKIE, $cookie);
         }
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         if ($file != null) {
             $fp = fopen($file, 'w');
             curl_setopt($curl, CURLOPT_FILE, $fp);
         }
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($curl);
         $info = curl_getinfo($curl);
         curl_close($curl);
