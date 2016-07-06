@@ -59,7 +59,8 @@ function curlHtml($url, $userAgent = null, $cookie = null, $param = null)
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($curl);
         $info = curl_getinfo($curl);
-        if ($info['http_code'] == 200) {
+        $httpCodeIsMatched = preg_match('/4\d{2}|5\d{2}/', $info['http_code']);
+        if (!$httpCodeIsMatched) {
             return $data;
         }
         usleep(1000000 * $i);
