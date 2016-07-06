@@ -59,6 +59,10 @@ foreach ($jkxyWikiUrlList as $key => $value) {
                         $pdfNameIsMatched = preg_match('/[^\?]+\?attname=(.*)/', $pdfName, $pdfName);
                         if ($pdfNameIsMatched) {
                             $pdfName = $pdfName[1];
+                            $pdfPath = $path . 'PDF' . DIRECTORY_SEPARATOR . $pdfName;
+                            echo $pdfPath;
+                            print_r(curlHtml($pdfUrl, $userAgent, $cookie, null, $pdfPath));
+                            echo PHP_EOL;
                             die;
                         }
                     }
