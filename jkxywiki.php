@@ -55,7 +55,12 @@ foreach ($jkxyWikiUrlList as $key => $value) {
                     $pdfUrlIsMatched = preg_match('/<a[^>]+>([^<]+)<\/a>/', $pdfDownloadHtml, $pdfUrl);
                     if ($pdfUrlIsMatched) {
                         $pdfUrl = $pdfUrl[1];
-
+                        $pdfName = pathinfo(urldecode($pdfUrl), PATHINFO_BASENAME);
+                        $pdfNameIsMatched = preg_match('/[^\?]+\?attname=(.*)/', $pdfName, $pdfName);
+                        if ($pdfNameIsMatched) {
+                            $pdfName = $pdfName[1];
+                            die;
+                        }
                     }
                 }
             }
