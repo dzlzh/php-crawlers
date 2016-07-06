@@ -59,6 +59,7 @@ function curlHtml($url, $userAgent = null, $cookie = null, $param = null)
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($curl);
         $info = curl_getinfo($curl);
+        curl_close($curl);
         $httpCodeIsMatched = preg_match('/4\d{2}|5\d{2}/', $info['http_code']);
         if (!$httpCodeIsMatched) {
             return $data;
