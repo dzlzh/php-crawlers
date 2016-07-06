@@ -40,7 +40,7 @@ function makeDirectory($path, $mode = 777)
  *  @return string
  */ 
 
-function curlHtml($url, $userAgent = null, $cookie = null, $param = null)
+function curlHtml($url, $userAgent = null, $cookie = null, $param = null, $file = null)
 {
     for ($i = 0; $i < 3; $i++) {
         $curl = curl_init();
@@ -56,10 +56,18 @@ function curlHtml($url, $userAgent = null, $cookie = null, $param = null)
         if ($cookie != null) {
             curl_setopt($curl, CURLOPT_COOKIE, $cookie);
         }
+        if ($file != null) {
+            $fp = fopen($file, 'w');
+            curl_setopt($curl, CURLOPT_FILE, $fp);
+        }
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($curl);
         $info = curl_getinfo($curl);
         curl_close($curl);
+        if ($file != null) {
+            fclose($fp);
+            return $info;
+        }
         $httpCodeIsMatched = preg_match('/4\d{2}|5\d{2}/', $info['http_code']);
         if (!$httpCodeIsMatched) {
             return $data;
