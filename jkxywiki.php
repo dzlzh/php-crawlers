@@ -60,9 +60,9 @@ foreach ($jkxyWikiUrlList as $key => $value) {
                         if ($pdfNameIsMatched) {
                             $pdfName = $pdfName[1];
                             $pdfPath = $path . 'PDF' . DIRECTORY_SEPARATOR . $pdfName;
-                            echo $pdfPath;
-                            print_r(curlHtml($pdfUrl, $userAgent, $cookie, null, $pdfPath));
-                            echo PHP_EOL;
+                            if (curlHtml($pdfUrl, $userAgent, $cookie, null, $pdfPath)) {
+                                echo '    |-- ', $pdfName, PHP_EOL;
+                            }
                             die;
                         }
                     }
