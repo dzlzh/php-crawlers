@@ -66,7 +66,8 @@ function curlHtml($url, $userAgent = null, $cookie = null, $param = null, $file 
         curl_close($curl);
         if ($file != null) {
             fclose($fp);
-            return $info;
+            $downloadFileSize = filesize($file);
+            return $downloadFileSize == $info['size_download'];
         }
         $httpCodeIsMatched = preg_match('/4\d{2}|5\d{2}/', $info['http_code']);
         if (!$httpCodeIsMatched) {
