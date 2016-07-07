@@ -39,7 +39,7 @@ if ($wikiHtmlIsMatched) {
 foreach ($jkxyWikiUrlList as $key => $value) {
     foreach ($value as $k => $v) {
         $path = DIRECTORY_PATH . DIRECTORY_SEPARATOR . $key . DIRECTORY_SEPARATOR . $k . DIRECTORY_SEPARATOR;
-        echo makeDirectory($path . 'PDF') && makeDirectory($path . 'ePub') ? $path . ' -- successful' . PHP_EOL : $path . ' -- failure' . PHP_EOL;
+        echo makeDirectory($path . 'pdf') && makeDirectory($path . 'epub') ? $path . ' -- successful' . PHP_EOL : $path . ' -- failure' . PHP_EOL;
         echo '|-- ', $key, PHP_EOL;
         echo '  |-- ', $k, PHP_EOL;
         $projectListUrl = $jkxyWikiUrl . $v;
@@ -47,31 +47,36 @@ foreach ($jkxyWikiUrlList as $key => $value) {
         $projectListIsMatched = preg_match_all('/<a\sclass="cell\scf"\shref="([^"]+)"\starget="_blank">/', $projectListHtml, $projectList);
         if ($projectListIsMatched) {
             foreach ($projectList[1] as $key => $value) {
-                $projectHtml = curlHtml($value, $userAgent, $cookie);
-                $pdfIsMatched = preg_match('/<a\shref="([^"]+)"\starget="_blank"\sclass="download-pdf\sblue-btn">/', $projectHtml, $pdfDownloadUrl);
-                if ($pdfIsMatched) {
-                    $pdfDownloadUrl = $jkxyWikiUrl . trim($pdfDownloadUrl[1]);
-                    $pdfDownloadHtml = curlHtml($pdfDownloadUrl, $userAgent, $cookie);
-                    if (strstr($pdfDownloadHtml, 'http_code:404')) {
-                        echo $pdfDownloadUrl, ' -- 404', PHP_EOL;
-                        continue;
-                    }
-                    $pdfUrlIsMatched = preg_match('/<a[^>]+>([^<]+)<\/a>/', $pdfDownloadHtml, $pdfUrl);
-                    if ($pdfUrlIsMatched) {
-                        $pdfUrl = $pdfUrl[1];
-                        $pdfName = pathinfo(urldecode($pdfUrl), PATHINFO_BASENAME);
-                        $pdfNameIsMatched = preg_match('/[^\?]+\?attname=(.*)/', $pdfName, $pdfName);
-                        if ($pdfNameIsMatched) {
-                            $pdfName = $pdfName[1];
-                            $pdfPath = $path . 'PDF' . DIRECTORY_SEPARATOR . $pdfName;
-                            if (curlHtml($pdfUrl, $userAgent, $cookie, null, $pdfPath)) {
-                                echo '    |-- ', $pdfName, PHP_EOL;
+                $projectHtml = curlHtml($value, $userAgent, $cookie); 
+                $isMatched = preg_match_all('/<a\shref="([^"]+)"\starget="_blank"\sclass="download-\w+\sblue-btn">/', $projectHtml, $downloadUrl);
+                if ($isMatched) {
+                    foreach ($downloadUrl[1] as $value) {
+                        $downloadUrl = $jkxyWikiUrl . trim($value);
+                        $downloadHtml = curlHtml($downloadUrl, $userAgent, $cookie);
+                        if (strstr($downloadHtml, 'http_code:404')) {
+                            echo $downloadUrl, ' -- 404', PHP_EOL;
+                            continue;
+                        }
+                        $fileUrlIsMatched = preg_match('/<a[^>]+>([^<]+)<\/a>/', $downloadHtml, $fileUrl);
+                        if ($fileUrlIsMatched) {
+                            $fileUrl = $fileUrl[1];
+                            $fileName = pathinfo(urldecode($fileUrl), PATHINFO_BASENAME);
+                            $fileStyle = pathinfo(urldecode($fileUrl), PATHINFO_EXTENSION);
+                            $fileNameIsMatched = preg_match('/[^\?]+\?attname=(.*)/', $fileName, $fileName);
+                            if ($fileNameIsMatched) {
+                                $fileName = $fileName[1];
+                                $filePath = $path . $fileStyle . DIRECTORY_SEPARATOR . $fileName;
+                                if (curlHtml($fileUrl, $userAgent, $cookie, null, $filePath)) {
+                                    echo '    |-- ', $fileName, PHP_EOL;
+                                }
                             }
                         }
                     }
                 }
+                die;
             }
         }
         die;
     }
 }
+
