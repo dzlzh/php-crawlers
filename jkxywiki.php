@@ -47,7 +47,7 @@ foreach ($jkxyWikiUrlList as $key => $value) {
         $projectListHtml = curlHtml($projectListUrl, $userAgent);
         $projectListIsMatched = preg_match_all('/<a\sclass="cell\scf"\shref="([^"]+)"\starget="_blank">/', $projectListHtml, $projectList);
         if ($projectListIsMatched) {
-            foreach ($projectList[1] as $key => $value) {
+            foreach ($projectList[1] as $value) {
                 $projectHtml = curlHtml($value, $userAgent, $cookie); 
                 $isMatched = preg_match_all('/<a\shref="([^"]+)"\starget="_blank"\sclass="download-\w+\sblue-btn">/', $projectHtml, $downloadUrl);
                 if ($isMatched) {
