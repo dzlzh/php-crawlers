@@ -73,10 +73,8 @@ foreach ($jkxyWikiUrlList as $key => $value) {
                         }
                     }
                 }
-                die;
             }
         }
-        die;
     }
 }
 
