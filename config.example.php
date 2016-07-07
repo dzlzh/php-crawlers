@@ -22,3 +22,5 @@ define("DIRECTORY_PATH", ROOT_DIRECTORY_PATH . DIRECTORY_SEPARATOR . DIRECTORY_N
 $jkxyWikiUrl = 'http://wiki.jikexueyuan.com';
 $userAgent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36';
 $cookie = '';
+
+$jkxyWikiUrlList = array();

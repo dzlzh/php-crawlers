@@ -15,21 +15,22 @@
 
 require_once 'config.php';
 
-$jkxyWikiUrlList = array();
-$wikiHtml = curlHtml($jkxyWikiUrl, $userAgent);
-$wikiHtmlIsMatched = preg_match('/<ul\sclass="aside-cList"\sid="jdropdown">\s*<!--\s+-->[\s\S]*<!--\s+-->\s*<\/ul>/', $wikiHtml, $wikiListHtml);
-if ($wikiHtmlIsMatched) {
-    $wikiListHtml = $wikiListHtml[0];
-    $wikiListIsMatched = preg_match_all('/<dt\sclass="hd"><a[^>]+>([^<]+)<\/a><\/dt>/', $wikiListHtml, $wikiList);
-    $wikiListHtmlArrayIsMatched = preg_match_all('/\s*<li>\s*<div>\s*<dl\s*class="list-nav">\s*<dt\s*class="hd"><a\s*class="active"\s*href="[^"]+">[^<]+<\/a><\/dt>\s*<\/dl>\s*<textarea\s*class="menu-item-wrap\s*none">\s*<div\s*class="list-show">\s*<div>\s*<dl>\s*<dd\s*class="cf">(\s*<a\s*href="[^"]+">[^<]+<\/a>)+\s*<\/dd>\s*<\/dl>\s*<\/div>\s*<\/div><!--\s*list-show\s*-->\s*<\/textarea>\s*<\/div>\s*<\/li>/', $wikiListHtml, $wikiListHtmlArray);
-    if ($wikiListIsMatched && $wikiListHtmlArrayIsMatched) {
-        foreach ($wikiList[1] as $key => $value) {
-            $value = str_replace(array('&amp;',' '), array('&',''), $value);
-            $listHtml = $wikiListHtmlArray[0][$key];
-            $listIsMatched = preg_match_all('/<a\shref="([^"]+)">([^<]+)<\/a>/', $listHtml, $list);
-            if ($listIsMatched) {
-                foreach ($list[0] as $k => $v) {
-                    $jkxyWikiUrlList[$value][str_replace(array('&amp;',' '), array('&',''), $list[2][$k])] = str_replace(array('&amp;',' '), array('&',''), $list[1][$k]);
+if ($jkxyWikiUrlList) {
+    $wikiHtml = curlHtml($jkxyWikiUrl, $userAgent);
+    $wikiHtmlIsMatched = preg_match('/<ul\sclass="aside-cList"\sid="jdropdown">\s*<!--\s+-->[\s\S]*<!--\s+-->\s*<\/ul>/', $wikiHtml, $wikiListHtml);
+    if ($wikiHtmlIsMatched) {
+        $wikiListHtml = $wikiListHtml[0];
+        $wikiListIsMatched = preg_match_all('/<dt\sclass="hd"><a[^>]+>([^<]+)<\/a><\/dt>/', $wikiListHtml, $wikiList);
+        $wikiListHtmlArrayIsMatched = preg_match_all('/\s*<li>\s*<div>\s*<dl\s*class="list-nav">\s*<dt\s*class="hd"><a\s*class="active"\s*href="[^"]+">[^<]+<\/a><\/dt>\s*<\/dl>\s*<textarea\s*class="menu-item-wrap\s*none">\s*<div\s*class="list-show">\s*<div>\s*<dl>\s*<dd\s*class="cf">(\s*<a\s*href="[^"]+">[^<]+<\/a>)+\s*<\/dd>\s*<\/dl>\s*<\/div>\s*<\/div><!--\s*list-show\s*-->\s*<\/textarea>\s*<\/div>\s*<\/li>/', $wikiListHtml, $wikiListHtmlArray);
+        if ($wikiListIsMatched && $wikiListHtmlArrayIsMatched) {
+            foreach ($wikiList[1] as $key => $value) {
+                $value = str_replace(array('&amp;',' '), array('&',''), $value);
+                $listHtml = $wikiListHtmlArray[0][$key];
+                $listIsMatched = preg_match_all('/<a\shref="([^"]+)">([^<]+)<\/a>/', $listHtml, $list);
+                if ($listIsMatched) {
+                    foreach ($list[0] as $k => $v) {
+                        $jkxyWikiUrlList[$value][str_replace(array('&amp;',' '), array('&',''), $list[2][$k])] = str_replace(array('&amp;',' '), array('&',''), $list[1][$k]);
+                    }
                 }
             }
         }
