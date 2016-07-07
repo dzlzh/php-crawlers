@@ -15,7 +15,7 @@
 
 require_once 'config.php';
 
-if ($jkxyWikiUrlList) {
+if (empty($jkxyWikiUrlList)) {
     $wikiHtml = curlHtml($jkxyWikiUrl, $userAgent);
     $wikiHtmlIsMatched = preg_match('/<ul\sclass="aside-cList"\sid="jdropdown">\s*<!--\s+-->[\s\S]*<!--\s+-->\s*<\/ul>/', $wikiHtml, $wikiListHtml);
     if ($wikiHtmlIsMatched) {
