@@ -19,16 +19,16 @@ require_once 'config.php';
 $pdo = new PDOMysql();
 $pdo->connect($dbconfig);
 
-$totalSql = 'SELECT count(uuid) AS number FROM lagou';
+$totalSql = 'SELECT count(uuid) AS number FROM lagou WHERE city="北京"';
 $total = $pdo->findOne($totalSql)['number'];
 echo 'Total:', $total, "\n";
 echo "-------------------------\n";
 
 $sql = array(
-    'district'     => 'SELECT district, COUNT(district) AS number FROM lagou GROUP BY district ORDER BY number DESC',
-    'financeStage' => 'SELECT financeStage, COUNT(financeStage) AS number FROM lagou GROUP BY financeStage ORDER BY number DESC',
-    'workYear'     => 'SELECT workYear, COUNT(workYear) AS number FROM lagou GROUP BY workYear ORDER BY number DESC',
-    'education'    => 'SELECT education, COUNT(education) AS number FROM lagou GROUP BY education ORDER BY number DESC',
+    'district'     => 'SELECT district, COUNT(district) AS number FROM lagou WHERE city="北京" GROUP BY district ORDER BY number DESC',
+    'financeStage' => 'SELECT financeStage, COUNT(financeStage) AS number FROM lagou WHERE city="北京" GROUP BY financeStage ORDER BY number DESC',
+    'workYear'     => 'SELECT workYear, COUNT(workYear) AS number FROM lagou WHERE city="北京" GROUP BY workYear ORDER BY number DESC',
+    'education'    => 'SELECT education, COUNT(education) AS number FROM lagou WHERE city="北京" GROUP BY education ORDER BY number DESC',
 );
 
 foreach ($sql as $key => $value) {
