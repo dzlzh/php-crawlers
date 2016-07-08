@@ -88,7 +88,7 @@ function output($data, $total)
     foreach ($data as $key => $value) {
         if ($value > 0) {
             $proportion = round(($value/$total)*100, 2) . '%';
-            echo $key, ':', $value, " —— ", $proportion, "\n";
+            echo '|', $key, '|', $value, "|", $proportion, "|\n";
         }
     }
 }
