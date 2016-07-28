@@ -38,7 +38,7 @@ for ($i = 1; $i <= 5; $i++) {
     echo "------------------------------------\n";
     $jobsUrl = $jobsBaseUrl . 'pn=' . $i;
     $jsonData = json_decode(curlHtml($jobsUrl), true);
-    if ($jsonData['content']['positionResult']['pageSize'] <= 0) {
+    if (empty($jsonData['content']['positionResult']['result'])) {
         break;
     }
     $jobs = $jsonData['content']['positionResult']['result'];
