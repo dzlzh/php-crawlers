@@ -46,7 +46,11 @@ echo "\n\tindustryField\n\n";
 $industryFieldSql = 'SELECT industryField FROM lagou';
 $industryFieldData = $pdo->findAll($industryFieldSql);
 foreach ($industryFieldData as $key => $value) {
-    $industryField = explode(' · ',$value['industryField']);
+    if (strstr($value['industryField'], ',') !== false) {
+        $industryField = explode(',',$value['industryField']);
+    } else {
+        $industryField = explode(' · ',$value['industryField']);
+    }
     $industryFieldData[$key] = trim($industryField[0]);
     for ($i = 1; $i < count($industryField); $i++) {
         $industryFieldData[] = trim($industryField[$i]);
