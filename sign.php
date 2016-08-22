@@ -23,8 +23,9 @@ require_once 'config.php';
 //StartSS sign
 if (!empty($URL['StartSS'])) {
     $StartSSSignURL = $URL['StartSS'];
-    $StartSSSign = curlHtml($StartSSSignURL, null, $COOKIE['StartSS'], $userAgent);
+    $StartSSSign = curlHtml($StartSSSignURL, '1', $COOKIE['StartSS'], $userAgent);
     print_r($StartSSSign);
+    echo "\n";
 }
 
 //v2dn sign
