@@ -24,8 +24,12 @@ require_once 'config.php';
 if (!empty($URL['StartSS'])) {
     $StartSSSignURL = $URL['StartSS'];
     $StartSSSign = curlHtml($StartSSSignURL, '1', $COOKIE['StartSS'], $userAgent);
-    print_r($StartSSSign);
-    echo "\n";
+    $StartSSSign = json_decode($StartSSSign, true);
+    if ($StartSSSign['ret'] === 1) {
+        echo $StartSSSign['msg'], "\n";
+    } else {
+        echo $StartSSSign['msg'], "\n";
+    }
 }
 
 //v2dn sign
