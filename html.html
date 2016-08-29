@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<H1>automatic-sign</H1>
+<iframe src="automaticSign.txt" frameborder="0" scrolling="no" id="automaticSign" onload="this.height=100" width="100%"></iframe>
+<H1>lagou-crawler</H1>
+<iframe src="lagouCrawler.txt" frameborder="0" scrolling="no" id="lagouCrawler" onload="this.height=100" width="100%"></iframe>
+<script type="text/javascript">
+function reinitIframe(){
+    var iframe = document.getElementById("automaticSign");
+    var iframe1 = document.getElementById("lagouCrawler");
+    try {
+       var bHeight = iframe.contentWindow.document.body.scrollHeight;
+       var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+       var height = Math.max(bHeight, dHeight);
+       iframe.height = height;
+       console.log(height);
+       var bHeight1 = iframe1.contentWindow.document.body.scrollHeight;
+       var dHeight1 = iframe1.contentWindow.document.documentElement.scrollHeight;
+       var height1 = Math.max(bHeight1, dHeight1);
+       iframe1.height = height1;
+       console.log(height1);
+    } catch (ex){}
+}
+window.setInterval("reinitIframe()", 200);
+</script>
+</body>
+</html>
