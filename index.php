@@ -14,5 +14,5 @@
  */
 
 
-$automaticSignLog = file_get_contents('/root/automatic-sign/sing.log');
+$automaticSignLog = file_get_contents('/root/automatic-sign/sign.log', FILE_USE_INCLUDE_PATH);
 echo $automaticSignLog;
