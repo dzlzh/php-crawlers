@@ -18,10 +18,8 @@ $automaticSignLog = file_get_contents('automaticSign.log', FILE_USE_INCLUDE_PATH
 $lagouCrawlerLog  = file_get_contents('lagouCrawler.log', FILE_USE_INCLUDE_PATH);
 echo '<pre>';
 echo 'automatic-sign';
-echo "\n";
 echo $automaticSignLog;
-echo "\n\n";
+echo "\n\n\n\n";
 echo 'lagou-crawler';
-echo "\n";
 echo $lagouCrawlerLog;
 echo '</pre>';
