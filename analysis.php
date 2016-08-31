@@ -131,9 +131,22 @@ function salary($data)
     return $salaryNum;
 }
 */
+function dataCount(&$keywordsCount, $data)
+{
+    return null;
+}
+$keywordsCount = array();
 $sql = 'SELECT `jobDescription` FROM lagou LIMIT 0, 5;';
 $datas = $pdo->findAll($sql);
-print_r($datas);
+foreach ($datas as $key=>$value) {
+    $isMatched = preg_match_all('/\b[a-zA-Z.]+\d?\b/', $value['jobDescription'], $matches);
+    if ($isMatched) {
+        
+        print_r(array_unique($matches[0]));
+    }
+    print_r($value['jobDescription']);
+    die;
+}
 $keywords = array(
     'php', 'mysql', 'web', 'linux', 'css',
     'javascript', 'html', 'ajax', 'jquery', 'sql',
