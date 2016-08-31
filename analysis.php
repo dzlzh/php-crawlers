@@ -18,7 +18,7 @@ require_once 'config.php';
 
 $pdo = new PDOMysql();
 $pdo->connect($dbconfig);
-
+/*
 $totalSql = 'SELECT count(uuid) AS number FROM lagou WHERE city="北京"';
 $total = $pdo->findOne($totalSql)['number'];
 echo 'Total:', $total, "\n";
@@ -130,4 +130,7 @@ function salary($data)
     }
     return $salaryNum;
 }
-
+*/
+$sql = 'SELECT `jobDescription` FROM lagou LIMIT 0, 5;';
+$datas = $pdo->findAll($sql);
+print_r($datas);
