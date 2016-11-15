@@ -49,6 +49,26 @@ for ($i = 1; $i <= 5; $i++) {
             } else {
                 $where = "positionId = '" . $job['positionId'] . "'";
                 $param = array(
+                    'positionId'        => $job['positionId'],
+                    'positionName'      => $job['positionName'],
+                    'positionType'      => empty($job['positionType']) ? '后端开发' : $job['positionType'],
+                    'positionAdvantage' => $job['positionAdvantage'],
+                    'companyName'       => $job['companyFullName'],
+                    // 'companyName'       => $job['companyName'],
+                    'companyShortName'  => $job['companyShortName'],
+                    'companySize'       => $job['companySize'],
+                    'companyLabelList'  => empty($job['companyLabelList']) ? 'unknown' : implode(',', $job['companyLabelList']),
+                    'industryField'     => $job['industryField'],
+                    'financeStage'      => $job['financeStage'],
+                    'city'              => $job['city'],
+                    'district'          => empty($job['district']) ? 'unknown' : $job['district'],
+                    'businessZones'     => empty($job['businessZones']) ? 'unknown' : implode(',', $job['businessZones']),
+                    'address'           => $address,
+                    'salary'            => $job['salary'],
+                    'workYear'          => $job['workYear'],
+                    'education'         => $job['education'],
+                    'jobNature'         => $job['jobNature'],
+                    'jobUrl'            => $jobUrl,
                     'createTime'        => $job['createTime'],
                     'collectionTime'    => date("Y-m-d H:i:s"),
                 );
