@@ -1,0 +1,7 @@
+.idea/
+*.log
+*.tmp
+*.swp
+tags
+config.php
+cookie
