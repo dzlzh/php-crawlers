@@ -20,41 +20,8 @@ echo "---", DATE, "---\n";
 //引入配置文件
 require_once 'config.php';
 
-//StartSS sign
-if (!empty($URL['StartSS'])) {
-    $StartSSSignURL = $URL['StartSS'];
-    $StartSSSign = curlHtml($StartSSSignURL, '1', $COOKIE['StartSS'], $userAgent);
-    $StartSSSign = json_decode($StartSSSign, true);
-    if ($StartSSSign['ret'] === 1) {
-        echo $StartSSSign['msg'], "\n";
-    } else {
-        echo $StartSSSign['msg'], "\n";
-    }
-}
-
-//v2dn sign
-if (!empty($URL['v2dn'])) {
-    $v2dnSignURL = $URL['v2dn'] . 'checkIn.php';
-    $v2dnSign = curlHtml($v2dnSignURL, null, $COOKIE['v2dn'], $userAgent);
-    if (strstr($v2dnSign, '302') !== false) {
-        $v2dnURL = $URL['v2dn'] . 'mypoints.php';
-        $v2dnHtml = curlHtml($v2dnURL, null, $COOKIE['v2dn'], $userAgent);
-        $isMatched = preg_match('/((((1[6-9]|[2-9]\d)\d{2})-(1[02]|0?[13578])-([12]\d|3[01]|0?[1-9]))|(((1[6-9]|[2-9]\d)\d{2})-(1[012]|0?[13456789])-([12]\d|30|0?[1-9]))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(1\d|2[0-8]|0?[1-9]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29-))/', $v2dnHtml, $matches);
-        if ($isMatched && $matches[0] == substr(DATE, 0, 10)) {
-            $isMatched = preg_match('/<strong>(\d+)/', $v2dnHtml, $matches);
-            if ($isMatched) {
-                echo "每日登录奖励$matches[1]\n";
-            } else {
-                echo "v2dn签到成功\n";
-            }
-        } else {
-            echo "v2dn签到失败\n";
-        }
-    }
-}
-
 //v2ex sign
-if (!empty($URL['v2ex'])) {
+if (!empty($COOKIE['v2ex'])) {
     $v2exHtml = curlHtml($URL['v2ex'], null, $COOKIE['v2ex'], $userAgent);
     $isMatched = preg_match('/\/mission\/daily\/(redeem\?once=\w*)/', $v2exHtml, $matches);
     if ($isMatched) {
@@ -74,11 +41,48 @@ if (!empty($URL['v2ex'])) {
     } else {
         $isMatched = preg_match('/\x{6bcf}\x{65e5}\x{767b}\x{5f55}\x{5956}\x{52b1}\x{5df2}\x{9886}\x{53d6}/u', $v2exHtml);
         if ($isMatched) {
-            echo "v2ex签到成功\n";
+            echo "v2ex 签到成功\n";
         } else {
-            echo "v2ex签到失败\n";
+            echo "v2ex 签到失败\n";
         }
     }
+}
+
+//v2dn sign
+if (!empty($COOKIE['v2dn'])) {
+    $v2dnSignURL = $URL['v2dn'] . 'checkIn.php';
+    $v2dnSign = curlHtml($v2dnSignURL, null, $COOKIE['v2dn'], $userAgent);
+    if (strstr($v2dnSign, '302') !== false) {
+        $v2dnURL = $URL['v2dn'] . 'mypoints.php';
+        $v2dnHtml = curlHtml($v2dnURL, null, $COOKIE['v2dn'], $userAgent);
+        $isMatched = preg_match('/((((1[6-9]|[2-9]\d)\d{2})-(1[02]|0?[13578])-([12]\d|3[01]|0?[1-9]))|(((1[6-9]|[2-9]\d)\d{2})-(1[012]|0?[13456789])-([12]\d|30|0?[1-9]))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(1\d|2[0-8]|0?[1-9]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29-))/', $v2dnHtml, $matches);
+        if ($isMatched && $matches[0] == substr(DATE, 0, 10)) {
+            $isMatched = preg_match('/<strong>(\d+)/', $v2dnHtml, $matches);
+            if ($isMatched) {
+                echo "v2dn 每日登录奖励$matches[1]\n";
+            } else {
+                echo "v2dn 签到成功\n";
+            }
+        } else {
+            echo "v2dn 签到失败\n";
+        }
+    }
+}
+
+//StartSS sign
+if (!empty($COOKIE['StartSS'])) {
+    $StartSSSignURL = $URL['StartSS'];
+    $StartSSSign = curlHtml($StartSSSignURL, '1', $COOKIE['StartSS'], $userAgent);
+    $StartSSSign = json_decode($StartSSSign, true);
+    echo 'StartSS:', $StartSSSign['msg'], "\n";
+}
+
+//ssfastproxy sign
+if (!empty($COOKIE['ssfastproxy'])) {
+    $ssfastproxySignURL = $URL['ssfastproxy'];
+    $ssfastproxySign = curlHtml($ssfastproxySignURL, '1', $COOKIE['ssfastproxy'], $userAgent);
+    $ssfastproxySign = json_decode($ssfastproxySign, true);
+    echo 'ssfastproxy:', $ssfastproxySign['msg'], "\n";
 }
 
 function curlHtml($url, $param = null, $cookie = null, $userAgent = null)
