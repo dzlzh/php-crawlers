@@ -73,7 +73,7 @@ if (!empty($COOKIE['v2dn'])) {
 if (!empty($COOKIE['StartSS'])) {
     $StartSSSignURL = $URL['StartSS'];
     $cookie = getCookie('https://startss.today/s?wd=%E5%B9%BD%E8%B0%B7%E6%B8%85%E6%B3%89');
-    $cookie .= getCookie('https://startss.today/auth/login', $COOKIE['StartSS'], 'POST', $cookie) 
+    $cookie .= getCookie('https://startss.today/auth/login', $COOKIE['StartSS'], 'POST', $cookie); 
     $StartSSSign = curlHtml($StartSSSignURL, '1', $cookie, $userAgent);
     $StartSSSign = json_decode($StartSSSign, true);
     echo 'StartSS:', $StartSSSign['msg'], "\n";
