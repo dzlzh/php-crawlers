@@ -72,7 +72,9 @@ if (!empty($COOKIE['v2dn'])) {
 //StartSS sign
 if (!empty($COOKIE['StartSS'])) {
     $StartSSSignURL = $URL['StartSS'];
-    $StartSSSign = curlHtml($StartSSSignURL, '1', $COOKIE['StartSS'], $userAgent);
+    $cookie = getCookie('https://startss.today/s?wd=%E5%B9%BD%E8%B0%B7%E6%B8%85%E6%B3%89');
+    $cookie .= getCookie('https://startss.today/auth/login', $COOKIE['StartSS'], 'POST', $cookie) 
+    $StartSSSign = curlHtml($StartSSSignURL, '1', $cookie, $userAgent);
     $StartSSSign = json_decode($StartSSSign, true);
     echo 'StartSS:', $StartSSSign['msg'], "\n";
 }
@@ -118,7 +120,7 @@ function curlHtml($url, $param = null, $cookie = null, $userAgent = null)
     return $error;
 }
 
-function getCookie($url, $param = null, $request = 'GET')
+function getCookie($url, $param = null, $request = 'GET', $cookie = null)
 {
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -131,6 +133,7 @@ function getCookie($url, $param = null, $request = 'GET')
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => $request,
         CURLOPT_POSTFIELDS => $param,
+        CURLOPT_COOKIE => $cookie,
     ));
     $response = curl_exec($curl);
     $err = curl_error($curl);
@@ -138,7 +141,7 @@ function getCookie($url, $param = null, $request = 'GET')
     if ($err) {
         echo "cURL Error #:" . $err;
     } else {
-        preg_match('/Set-Cookie:([^;]+);/', $response, $matches);
+        preg_match('/Set-Cookie:([^;]+;)/', $response, $matches);
         return $matches[1];
     } 
 }
