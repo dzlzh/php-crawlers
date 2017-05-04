@@ -80,29 +80,7 @@ if (!empty($COOKIE['StartSS'])) {
 //ssfastproxy sign
 if (!empty($COOKIE['ssfastproxy'])) {
     $ssfastproxySignURL = $URL['ssfastproxy'];
-
-    $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://ssfastproxy.com/auth/login",
-        CURLOPT_HEADER => 1,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => $COOKIE['ssfastproxy'],
-    ));
-    $response = curl_exec($curl);
-    $err = curl_error($curl);
-    curl_close($curl);
-    if ($err) {
-        echo "cURL Error #:" . $err;
-    } else {
-        preg_match('/Set-Cookie:([^;]+);/', $response, $matches);
-        $cookie = $matches[1];
-    } 
-
+    $cookie = getCookie('https://ssfastproxy.com/auth/login', $COOKIE['ssfastproxy'], 'POST');
     $ssfastproxySign = curlHtml($ssfastproxySignURL, '1', $cookie, $userAgent);
     $ssfastproxySign = json_decode($ssfastproxySign, true);
     echo 'ssfastproxy:', $ssfastproxySign['msg'], "\n";
@@ -138,4 +116,29 @@ function curlHtml($url, $param = null, $cookie = null, $userAgent = null)
         $error .= ';param:' . '(' . serialize($param) . ')';
     }
     return $error;
+}
+
+function getCookie($url, $param = null, $request = 'GET')
+{
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $url,
+        CURLOPT_HEADER => 1,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => $request,
+        CURLOPT_POSTFIELDS => $param,
+    ));
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+    if ($err) {
+        echo "cURL Error #:" . $err;
+    } else {
+        preg_match('/Set-Cookie:([^;]+);/', $response, $matches);
+        return $matches[1];
+    } 
 }
