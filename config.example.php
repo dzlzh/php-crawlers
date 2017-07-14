@@ -24,7 +24,7 @@ $URL = array(
 $COOKIE = array(
     //'网站名称' => 'cookie',
     'v2ex' => '',
-    'v2dn' => '',
+    'v2dn' => ['email' => '', 'password' => ''],
     'StartSS' => '',
     'ssfastproxy' => '',
 );
