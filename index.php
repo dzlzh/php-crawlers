@@ -19,12 +19,19 @@ define('DATE', date('Y-m-d H:i:s'));
 echo "---", DATE, "---\n";
 
 $userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36';
-$cookie = '';
-$url    = 'https://www.v2ex.com/mission/daily/';
+$url       = 'https://www.v2ex.com/mission/daily/';
+// 邮件
+$subject   = 'V2ex-' . DATE;
+$APIKey    = '';
+$domain    = '';
+$mailTo    = '';
+
+$cookie    = '';
 
 //v2ex sign
 if (!empty($cookie)) {
-    $v2exHtml = curlHtml($url, null, $cookie, $userAgent);
+    $message   = '';
+    $v2exHtml  = curlHtml($url, null, $cookie, $userAgent);
     $isMatched = preg_match('/\/mission\/daily\/(redeem\?once=\w*)/', $v2exHtml, $matches);
     if ($isMatched) {
         $v2exSignURL = $url . $matches[1];
@@ -33,21 +40,32 @@ if (!empty($cookie)) {
             $v2exHtml = curlHtml($url, null, $cookie, $userAgent);
             $isMatched = preg_match('/\x{6bcf}\x{65e5}\x{767b}\x{5f55}\x{5956}\x{52b1}\x{5df2}\x{9886}\x{53d6}/u', $v2exHtml);
             if ($isMatched) {
-                echo "v2ex签到成功\n";
+                $message = "v2ex签到成功\n";
             } else {
-                echo "v2ex签到失败\n";
+                $message = "v2ex签到失败\n";
             }
         } else {
-            echo $v2exSign, "\n";
+            $message = $v2exSign . "\n";
         }
     } else {
         $isMatched = preg_match('/\x{6bcf}\x{65e5}\x{767b}\x{5f55}\x{5956}\x{52b1}\x{5df2}\x{9886}\x{53d6}/u', $v2exHtml);
         if ($isMatched) {
-            echo "v2ex 签到成功\n";
+            $message = "v2ex 签到成功\n";
         } else {
-            echo "v2ex 签到失败\n";
+            $message = "v2ex 签到失败\n";
         }
     }
+    echo $message;
+
+    // 发送邮件
+    $shell  = '';
+    $shell .= "curl -s --user 'api:{$APIKey}' ";
+    $shell .= "https://api.mailgun.net/v3/{$domain}/messages ";
+    $shell .= "-F from='Notification <mailgun@{$domain}>' ";
+    $shell .= "-F to={$mailTo} ";
+    $shell .= "-F subject='{$subject}' ";
+    $shell .= "-F text='{$message}'";
+    echo `$shell`;
 }
 
 function curlHtml($url, $param = null, $cookie = null, $userAgent = null)
